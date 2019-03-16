@@ -1,2 +1,4 @@
-# 1340-Group-2
-This is 1340 Group Project of Li Jialong and Wang Xinxin.
+# ENGG1340-Group-2
+Group members:
+Li Jialong(3035533795)
+Wang Xinxin()
