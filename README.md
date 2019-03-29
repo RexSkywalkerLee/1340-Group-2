@@ -21,19 +21,29 @@ When user types in a specific keyword (e.g., check), the system calls a function
 Assumptions:
 When user types in a specific keyword (e.g., delete/edit), the system calls a function which opens a file and receives input (record information of the record to be deleted/edited) from the user, search for the specific record in that file. Then, the user can input another record to replace the original one(automatically replacing the original one with a empty record if the command was "delete").After that,the function closes that file before it ends.
 
-5)The accounting system allows monthly budget resetting and editing at any time. When expenses reach the budget, there will be an alert from the system. Hence, users can flexibly change their financial plan and make sure that the expenses will not be beyond expectations;
+5)Users could monthly reset the budget and edit it at any time. When expenses reach the budget, there will be an alert from the system. Hence, users can flexibly change their financial plan and make sure that the expenses will not be beyond expectations;
 Assumptions:
 In the directory of each user, there's a file containing the budget information. Particular functions are used to allow users to add, reset and edit their total budgets. Another function is used to open the file containing records and retrieve information, then calculate the remaining budgets and send out an alert when the remaining budget is below a predefined number.  
 
-6)The system can provide a statistical report of users’ financial state: monthly, quarterly, yearly income and expenses, the percentage of each type of income(salary, bonus, etc.) and expenses(food, transportation, etc.) so that users can view their financial states in a more systematic long-run perspective;
+6)Users could request a statistical report of users’ financial state: monthly, quarterly, yearly income and expenses, the percentage of each type of income(salary, bonus, etc.) and expenses(food, transportation, etc.) so that users can view their financial states in a more systematic long-run perspective;
 Assumptions:
 When the user types in a specific keyword to ask for a statistical report, the system uses a function to open the file containing records and retrieve information which was sorted by date, then calculate that monthly/quarterly/annual income/expense along with the percentage of each type and display them.  
 
-7)The system allows users to check their accounts information at any time; account information includes credit card invoice, bank account balance, etc.; accounts information will be automatically updated each time the user adds ( or delete edit) expense or income records.Therefore, user can hold a clear idea about each account's information timely and have a quick response to any significant change of the balance;
+7)Users could check their accounts information at any time; account information includes credit card invoice, bank account balance, etc.; accounts information will be automatically updated each time the user adds ( or delete edit) expense or income records.Therefore, user can hold a clear idea about each account's information timely and have a quick response to any significant change of the balance;
 Assumptions:
 In the directory of each user, there's a file containing the account information(the initial account information should be stored in this file the time a user signs up). Each time the user adds (edit, delete) a record, the system also calls a function to open this account-information file and update the account information. When the user types in a specific keyword to ask to check account information, the system opens this file and displays the contents.  
 
-8)Users can request a report of each day's balance(graphically) of the latest seven days so that the records of the most recent seven days can be represented more concisely and straightforwardly;
+8)Users could request a report of each day's balance(graphically) of the latest seven days so that the records of the most recent seven days can be represented more concisely and straightforwardly;
 Assumptions:
 When user types in a specific keyword to ask for a late report, the system calls a function that opens the file containing records and retrieves records of the latest seven days, then calculates each day's balance. The balance's value is then illustrated by the number of special characters(e.g., &, *).The report will be formed by listing the date and graphical balance of each day sequentially.
  
+Keyword					    function 
+Add						    add records
+Check				 	       view records by date, type, and account 
+Delete					    check and delete records
+Edit						    check and edit records
+Setbudget				    monthly budget resetting and editing at any time
+Mreport/Qreport/Yreport  ask for monthly, quarterly, yearly report
+Latest 					    request a report of each day's balance(graphically)
+
+
