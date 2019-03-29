@@ -37,13 +37,13 @@ In the directory of each user, there's a file containing the account information
 Assumptions:
 When user types in a specific keyword to ask for a late report, the system calls a function that opens the file containing records and retrieves records of the latest seven days, then calculates each day's balance. The balance's value is then illustrated by the number of special characters(e.g., &, *).The report will be formed by listing the date and graphical balance of each day sequentially.
  
-Keyword					    function 
-Add						    add records
-Check				 	       view records by date, type, and account 
-Delete					    check and delete records
-Edit						    check and edit records
-Setbudget				    monthly budget resetting and editing at any time
-Mreport/Qreport/Yreport  ask for monthly, quarterly, yearly report
-Latest 					    request a report of each day's balance(graphically)
+Keyword		-----			    function 
+Add			-----			    add records
+Check			-----	 	       view records by date, type, and account 
+Delete		-----			    check and delete records
+Edit			-----			    check and edit records
+Setbudget	-----			    monthly budget resetting and editing at any time
+Mreport/Qreport/Yreport ----- ask for monthly, quarterly, yearly report
+Latest 			------		    request a report of each day's balance(graphically)
 
 
