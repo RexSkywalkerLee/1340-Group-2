@@ -3,10 +3,11 @@
 #include<fstream>
 #include<sstream>
 #include<string>
+#include"recordsManipulation.h"
 using namespace std;
 int panel();
-void sign_up();
-void sign_in();
+string sign_up();
+string sign_in();
 
 
 int panel()
@@ -24,7 +25,7 @@ int panel()
   return choice;
 }
 
-void sign_up()
+string sign_up()
 {
   string username, password, password_2;
   cout << "Please set your username: ";
@@ -54,7 +55,7 @@ void sign_up()
     fout << "Credit Card: " << info << endl;
     fout.close();
     cout << "You have signed up! Please sign in to start account management." << endl;
-    sign_in();
+    return sign_in();
   }
   else{
     cout << "Password is not correct. Please set again." << endl;
@@ -62,7 +63,7 @@ void sign_up()
   }
 }
 
-void sign_in(){
+string sign_in(){
   string username = "", password = "", info, readname, readword;
   ifstream fin ("userinfo.txt");
   JumpToPoint2:
@@ -76,7 +77,7 @@ void sign_in(){
     iss >> readword;
     if (username == readname && readword == password){
       cout << "Hello " + username + "!" << endl;
-      return;
+      return username;
     }
   }
   int choice;
@@ -88,10 +89,10 @@ void sign_in(){
   else { fin.close(); exit(1);}
 }
 
-int main()
+void Records::sign()
 {
   int choice = panel();
-  if (choice == 1) sign_up();
-  else if (choice == 2) sign_in();
+  if (choice == 1) user = sign_up();
+  else if (choice == 2) user = sign_in();
   else exit(1);
 }
