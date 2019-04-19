@@ -30,10 +30,13 @@ void Records::add()
     cout << "1.Salary" << "\t2.Bonus" << "\t\t3.Allowance" << "\t4.Investment" << "\t5.Other" << endl;
   }
   cin >> recordType;
-  cout << "Please choose account type: \n" << "1.Cash\n" << "2.Bank Card\n"
+  cout << "Please choose account type: \n" << "1.Cash\n" << "2.Debit Card\n"
        << "3.Credit Card\n";
   cin >> accountType;
   fout << typeChoice << ' ' << amount << ' ' << date << ' ' << recordType << ' ' << accountType << endl;
+  
+  UpdateAccount(typeChoice,amount,accountType, user+ "_account.txt")
+  
   fout.close();
 }
 
@@ -61,7 +64,7 @@ void Records::check()
       break;}
     case 3:{
       cout << "Please type in the account you search by:\n" << "1. Cash\n"
-           << "2. Bank Card\n" << "3. Credit Card\n";
+           << "2. Debit Card\n" << "3. Credit Card\n";
       string account, aKey;
       cin >> account;
       for (int i = 0; i < records.size(); i++){
