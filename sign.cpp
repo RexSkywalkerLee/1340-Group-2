@@ -47,12 +47,12 @@ string sign_up()
     cout << "cash: ";
     cin >> info;
     fout << "Cash: " << info << endl;
-    cout << "Bank Card: ";
+    cout << "Bank_Card: ";
     cin >> info;
-    fout << "Bank Card: " << info << endl;
-    cout << "Credit Card: ";
+    fout << "Bank_Card: " << info << endl;
+    cout << "Credit_Card: ";
     cin >> info;
-    fout << "Credit Card: " << info << endl;
+    fout << "Credit_Card: " << info << endl;
     fout.close();
     cout << "You have signed up! Please sign in to start account management." << endl;
     return sign_in();
@@ -65,8 +65,8 @@ string sign_up()
 
 string sign_in(){
   string username = "", password = "", info, readname, readword;
-  ifstream fin ("userinfo.txt");
   JumpToPoint2:
+  ifstream fin ("userinfo.txt");
   cout << "Username: ";
   cin >> username;
   cout << "Password: ";
