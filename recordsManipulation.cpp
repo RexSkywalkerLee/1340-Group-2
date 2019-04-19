@@ -85,7 +85,6 @@ void Records::check()
         }
         break;
       }
-
     }
     case 2:{
       cout << "Please type in the date in the format dd/mm/yyyy: ";
