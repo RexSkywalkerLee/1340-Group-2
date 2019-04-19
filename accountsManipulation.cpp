@@ -7,7 +7,7 @@
 using namespace std;
 
 
-void UpdateAccount(char PosONeg,int amount, int type, string useracount){
+void account::UpdateAccount(char PosONeg,int amount, int type, string useracount){
 	int n=type-1;
 	if  (PosONeg=='-') amount=(0-amount);
 	ifstream fin(useraccount);
@@ -29,4 +29,11 @@ void UpdateAccount(char PosONeg,int amount, int type, string useracount){
 	for(int i=0;i<3;i++)  fout1<<records[i]<<endl;
 	fout.close();
 } 
+void account::DisplayAccount(string user){
+	string item;
+	cout<<"Account information of "<<user<<endl;
+	ifstream fin(user + "_account.txt");
+	while (getline(fin, item)) cout<<item<<endl;
+	fin.close();
+}
 
