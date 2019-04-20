@@ -7,7 +7,7 @@
 using namespace std;
 
 
-void info::updateAccount(int amount, int type){
+void info::updateAccount(double amount, int type){
     ifstream fin(user + "_account.txt");
     vector<string> records; string temp;
     while (getline(fin, temp)) records.push_back(temp); 
