@@ -12,7 +12,7 @@ public:
 
   void addRecord();
   void checkRecord();
-  void updateAccount(int amount, int type);
+  void updateAccount(double amount, int type);
   void displayAccount();
   void set(string username) {user = username;}
 
