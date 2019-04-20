@@ -7,7 +7,9 @@ using namespace std;
 int main()
 {
   Records userRecord;
-  string user=userRecord.sign();
+  userRecord.sign();
+  string user=userRecord.username();
+  account user1;
   int choice;
   JumpToPointMain:
   cout << "Please indicate your choice to start account management:\n";
@@ -31,7 +33,7 @@ int main()
     case 7:
     break;
     case 8:
-    user.DisplayAccount(user);
+    user1.DisplayAccount(user);
     break;
     case 9:
     exit(1);

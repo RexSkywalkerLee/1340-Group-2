@@ -8,6 +8,7 @@ public:
   void sign();
   void add();
   void check();
+  string username();
 
 private:
   string user;

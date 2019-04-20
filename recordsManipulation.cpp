@@ -77,3 +77,6 @@ void Records::check()
   }
   fin.close();
 }
+string Records::username(){
+	return user;
+}
