@@ -3,37 +3,36 @@
 #include<fstream>
 #include<sstream>
 #include<vector>
-#include"accountsManipulation.h"
+#include"head.h"
 using namespace std;
 
 
-void account::UpdateAccount(char PosONeg,int amount, int type, string useracount){
-	int n=type-1;
-	if  (PosONeg=='-') amount=(0-amount);
-	ifstream fin(useraccount);
-	vector<string> records; int i = 0;
-  	while (getline(fin, records[i])) i++;
-  	fin.close();
+void info::updateAccount(int amount, int type){
+    ifstream fin(user + "_account.txt");
+    vector<string> records; string temp;
+    while (getline(fin, temp)) records.push_back(temp); 
+    fin.close();
     string aType;
-   	int total;
-    istringstream iss(records[n]);
-   	for (int j = 0; j < 2; j++) { 
-			iss >> info;
-       		if (j==0)	aType=info;	
-       		if (j==1)	
-			{int total=stoi(info);
-				 total+=amount; }
-			}
-			record[n]=aType+' '+to_string(total);
-	ofstream fout1(useraccount);
-	for(int i=0;i<3;i++)  fout1<<records[i]<<endl;
-	fout.close();
-} 
-void account::DisplayAccount(string user){
+    istringstream iss(records[type]);
+    string info;
+    iss >> aType >> info;	
+    int total=atoi(info.c_str()) + amount;
+    records[type]=aType+' '+to_string(total);
+    ofstream fout1(user + "_account.txt");
+    for(int i=0;i<3;i++)  fout1<<records[i]<<endl;
+    fout1.close();
+}
+ 
+void info::displayAccount(){
 	string item;
-	cout<<"Account information of "<<user<<endl;
+	cout<<"\nAccount information of "<<user<< ':' << endl;
 	ifstream fin(user + "_account.txt");
 	while (getline(fin, item)) cout<<item<<endl;
 	fin.close();
+        cout << "Continue management? (Y/N)" << endl;
+        char finalChoice;
+        cin >> finalChoice;
+        if (finalChoice == 'Y') return;
+        else exit(1);
 }
 

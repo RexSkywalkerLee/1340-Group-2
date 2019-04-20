@@ -3,7 +3,8 @@
 #include<fstream>
 #include<sstream>
 #include<string>
-#include"recordsManipulation.h"
+#include"head.h"
+
 using namespace std;
 int panel();
 string sign_up();
@@ -46,13 +47,13 @@ string sign_up()
     cout << "Initiating accouting system: " << endl;
     cout << "Cash: ";
     cin >> info;
-    fout << "Cash: " << info << endl;
-    cout << "DebitCard: ";
+    fout << "Cash " << info << endl;
+    cout << "Debit_Card: ";
     cin >> info;
-    fout << "DebitCard: " << info << endl;
-    cout << "CreditCard: ";
+    fout << "Debit_Card " << info << endl;
+    cout << "Credit_Card: ";
     cin >> info;
-    fout << "CreditCard: " << info << endl;
+    fout << "Credit_Card " << info << endl;
     fout.close();
     cout << "You have signed up! Please sign in to start account management." << endl;
     return sign_in();
@@ -76,7 +77,7 @@ string sign_in(){
     iss >> readname;
     iss >> readword;
     if (username == readname && readword == password){
-      cout << "Hello " + username + "!" << endl;
+      cout << "\nHello " + username + "!\n\n";
       return username;
     }
   }
@@ -89,10 +90,10 @@ string sign_in(){
   else { fin.close(); exit(1);}
 }
 
-void Records::sign()
+string sign()
 {
   int choice = panel();
-  if (choice == 1) user = sign_up();
-  else if (choice == 2) user = sign_in();
+  if (choice == 1) return sign_up();
+  else if (choice == 2) return  sign_in();
   else exit(1);
 }

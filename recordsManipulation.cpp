@@ -3,11 +3,11 @@
 #include<fstream>
 #include<sstream>
 #include<vector>
-#include"recordsManipulation.h"
-
+#include<map>
+#include"head.h"
 using namespace std;
 
-void Records::add()
+void info::addRecord()
 {
   ofstream fout(user + "_records.txt", ios::app);
   char typeChoice;
@@ -19,7 +19,7 @@ void Records::add()
   cout << "Please type in the amount of the new record: ";
   cin >> amount;
   cout << "Please type in the date in the format dd mm yyyy: ";
-  cin >> day >> month >>year ;
+  cin >> day >> month >> year ;
   cout << "Please choose the type from following: \n";
   if (typeChoice == '-'){
     cout << "1.Breakfast" << "\t2.Dinner" << "\t3.Snacks" << "\t4.Grocery" << "\t5.Social" << endl;
@@ -34,25 +34,24 @@ void Records::add()
   cout << "Please choose account type: \n" << "1.Cash\n" << "2.Debit Card\n"
        << "3.Credit Card\n";
   cin >> accountType;
-  fout << typeChoice << ' ' << amount << ' ' << day<<' '<< month <<' '<<year << ' ' << recordType << ' ' << accountType << endl;
-
-  UpdateAccount(typeChoice,amount,accountType, user+ "_account.txt");
-
+  fout << typeChoice << ' ' << amount << ' ' << day<<' '<< month <<' '<<year << ' ';
+  if (typeChoice == '-') fout << expense[recordType];
+  else fout << income[recordType];
+  fout << ' ' << account[accountType] << endl;
   fout.close();
-  cout << "Record added! Continue management? (Y/N)" << endl;
+  updateAccount((typeChoice == '-')?(0-amount):amount, accountType-1); 
+  cout << "\nRecord added! Continue management? (Y/N)" << endl;
   char finalChoice;
   cin >> finalChoice;
   if (finalChoice == 'Y') return;
   else exit(1);
 }
 
-void Records::check()
+void info::checkRecord()
 {
   ifstream fin(user + "_records.txt");
   vector<string> records; string temp;
-
-  vector<string> record; 
-
+  string* record = new string[7]; 
   while (getline(fin, temp)) records.push_back(temp);
   int choice1;
   cout << "Please indicate the way you are searching by:\n" << "1. Type\n" << "2. Date\n"
@@ -72,7 +71,7 @@ void Records::check()
         cin >> tKey2;
         for (int i = 0; i < records.size(); i++){
           istringstream iss(records[i]);
-          for (int j = 0; j < 4; j++) {if (j == 0) iss >> tKey1; else iss >> recordType;}
+          for (int j = 0; j < 6; j++) {if (j == 0) iss >> tKey1; else iss >> recordType;}
           if (tKey1 == '-' && expense[tKey2] == recordType) cout << records[i] << endl;
         }
         break;
@@ -83,15 +82,16 @@ void Records::check()
         cin >> tKey2;
         for (int i = 0; i < records.size(); i++){
           istringstream iss(records[i]);
-          for (int j = 0; j < 4; j++) {if (j == 0) iss >> tKey1; else iss >> recordType;}
+          for (int j = 0; j < 6; j++) {if (j == 0) iss >> tKey1; else iss >> recordType;}
           if (tKey1 == '+' && income[tKey2] == recordType) cout << records[i] << endl;
         }
         break;
       }
     }
     case 2:{
+          string day, month, year;
 	  cout << "Please type in the date in the format dd mm yyyy: ";
-	  cin >> day >> month >>year ;
+	  cin >> day >> month >> year;
       for (int i = 0; i < records.size(); i++){
         istringstream iss(records[i]);
         for (int j = 0; j < 7; j++) iss >> record[j];
@@ -110,12 +110,12 @@ void Records::check()
       break;}
   }
   fin.close();
-  cout << "Continue management? (Y/N)" << endl;
+  cout << "\nContinue management? (Y/N)" << endl;
   char finalChoice;
   cin >> finalChoice;
   if (finalChoice == 'Y') return;
   else exit(1);
 }
-string Records::username(){
-	return user;
-}
+
+
+

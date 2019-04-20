@@ -1,10 +1,12 @@
-sign.o: sign.cpp recordsManipulation.h
+sign.o: sign.cpp head.h 
 	g++ -pedantic-errors -std=c++11 -c $<
-recordsManipulation.o: recordsManipulation.cpp recordsManipulation.h
+accountsManipulation.o: accountsManipulation.cpp head.h 
 	g++ -pedantic-errors -std=c++11 -c $<
-main.o: main.cpp recordsManipulation.h
+recordsManipulation.o: recordsManipulation.cpp head.h 
 	g++ -pedantic-errors -std=c++11 -c $<
-main: sign.o main.o recordsManipulation.o
+main.o: main.cpp head.h 
+	g++ -pedantic-errors -std=c++11 -c $<
+main: sign.o main.o recordsManipulation.o accountsManipulation.o
 	g++ $^ -o $@
 clean:
 	rm *.o main
