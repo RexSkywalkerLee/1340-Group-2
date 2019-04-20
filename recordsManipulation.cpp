@@ -11,14 +11,14 @@ void Records::add()
   ofstream fout(user + "_records.txt", ios::app);
   char typeChoice;
   int amount, recordType, accountType;
-  string date;
+  string day, month, year;
   cout << "Please choose new record type:\n" << "1. Expense (please type \"-\")\n"
        << "2. Income (please type \"+\")\n";
   cin >> typeChoice;
   cout << "Please type in the amount of the new record: ";
   cin >> amount;
-  cout << "Please type in the date in the format dd/mm/yyyy: ";
-  cin >> date;
+  cout << "Please type in the date in the format dd mm yyyy: ";
+  cin >> day >> month >>year ;
   cout << "Please choose the type from following: \n";
   if (typeChoice == '-'){
     cout << "1.Breakfast" << "\t2.Dinner" << "\t3.Snacks" << "\t4.Grocery" << "\t5.Social" << endl;
@@ -30,17 +30,22 @@ void Records::add()
     cout << "1.Salary" << "\t2.Bonus" << "\t\t3.Allowance" << "\t4.Investment" << "\t5.Other" << endl;
   }
   cin >> recordType;
-  cout << "Please choose account type: \n" << "1.Cash\n" << "2.Bank Card\n"
+  cout << "Please choose account type: \n" << "1.Cash\n" << "2.Debit Card\n"
        << "3.Credit Card\n";
   cin >> accountType;
-  fout << typeChoice << ' ' << amount << ' ' << date << ' ' << recordType << ' ' << accountType << endl;
+  fout << typeChoice << ' ' << amount << ' ' << day<<' '<< month <<' '<<year << ' ' << recordType << ' ' << accountType << endl;
+  
+  UpdateAccount(typeChoice,amount,accountType, user+ "_account.txt")
+  
   fout.close();
 }
 
 void Records::check()
 {
   ifstream fin(user + "_records.txt");
-  vector<string> records; int i = 0;
+  vector<string> records; 
+  vector<string> record; 
+  int i = 0;
   while (getline(fin, records[i])) i++;
   int choice1;
   cout << "Please indicate the way you are searching by:\n" << "1. Type\n" << "2. Date\n"
@@ -50,26 +55,28 @@ void Records::check()
     case 1:
       break;
     case 2:{
-      cout << "Please type in the date in the format dd/mm/yyyy: ";
-      string date, dKey;
-      cin >> date;
+	  cout << "Please type in the date in the format dd mm yyyy: ";
+	  cin >> day >> month >>year ;
       for (int i = 0; i < records.size(); i++){
         istringstream iss(records[i]);
-        for (int j = 0; j < 3; j++) iss >> dKey;
-        if (dKey == date) cout << records[i] << endl;
+        for (int j = 0; j < 7; j++) iss >> record[j];
+        if ((day==record[2])&&(month==record[3])&&(year==record[4])) cout << records[i] << endl;
       }
       break;}
     case 3:{
       cout << "Please type in the account you search by:\n" << "1. Cash\n"
-           << "2. Bank Card\n" << "3. Credit Card\n";
+           << "2. Debit Card\n" << "3. Credit Card\n";
       string account, aKey;
       cin >> account;
       for (int i = 0; i < records.size(); i++){
         istringstream iss(records[i]);
-        for (int j = 0; j < 4; j++) iss >> aKey;
+        for (int j = 0; j < 4; j++) iss >> record[j];
         if (aKey == account) cout << records[i] << endl;
       }
       break;}
   }
   fin.close();
+}
+string Records::username(){
+	return user;
 }
