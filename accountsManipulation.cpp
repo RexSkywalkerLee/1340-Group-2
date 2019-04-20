@@ -16,7 +16,7 @@ void info::updateAccount(int amount, int type){
     istringstream iss(records[type]);
     string info;
     iss >> aType >> info;	
-    int total=atoi(info.c_str()) + amount;
+    int total=atof(info.c_str()) + amount;
     records[type]=aType+' '+to_string(total);
     ofstream fout1(user + "_account.txt");
     for(int i=0;i<3;i++)  fout1<<records[i]<<endl;
