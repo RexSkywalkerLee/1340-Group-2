@@ -9,6 +9,7 @@ using namespace std;
 int panel();
 string sign_up();
 string sign_in();
+void terminateORnot();
 
 
 int panel()
@@ -43,17 +44,18 @@ string sign_up()
     fout.open(username + "_records.txt", ios::app);
     fout.close();
     fout.open(username + "_account.txt", ios::app);
-    double info;
+    double info1, info2, info3;
     cout << "Initiating accouting system: " << endl;
     cout << "Cash: ";
-    cin >> info;
-    fout << "Cash " << info << endl;
+    cin >> info1;
     cout << "Debit_Card: ";
-    cin >> info;
-    fout << "Debit_Card " << info << endl;
+    cin >> info2;
     cout << "Credit_Card: ";
-    cin >> info;
-    fout << "Credit_Card " << info << endl;
+    cin >> info3;
+    fout << info1 << ' ' << info2 << ' ' << info3 << endl;
+    fout << "Cash " << info1 << endl;
+    fout << "Debit_Card " << info2 << endl;
+    fout << "Credit_Card " << info3 << endl;
     fout.close();
     cout << "You have signed up! Please sign in to start account management." << endl;
     return sign_in();
@@ -63,6 +65,7 @@ string sign_up()
     goto JumpToPoint1;
   }
 }
+
 
 string sign_in(){
   string username = "", password = "", info, readname, readword;
@@ -90,10 +93,20 @@ string sign_in(){
   else { fin.close(); exit(1);}
 }
 
+
 string sign()
 {
   int choice = panel();
   if (choice == 1) return sign_up();
   else if (choice == 2) return  sign_in();
+  else exit(1);
+}
+
+void terminateORnot()
+{
+  cout <<"Continue management? (Y/N)" << endl;
+  char finalChoice;
+  cin >> finalChoice;
+  if (finalChoice == 'Y') return;
   else exit(1);
 }

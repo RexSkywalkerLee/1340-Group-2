@@ -17,13 +17,22 @@ int main()
   switch (choice){
     case 1:
     userInfo.addRecord();
+    cout << "\nRecord added!\n";
+    terminateORnot();
     break;
     case 2:
     userInfo.checkRecord();
+    terminateORnot();
     break;
     case 3:
+    userInfo.editRecord();
+    cout << "\nRecord edited!\n";
+    terminateORnot();
     break;
     case 4:
+    userInfo.deleteRecord();
+    cout << "Record deleted!\n";
+    terminateORnot();
     break;
     case 5:
     break;
@@ -33,6 +42,7 @@ int main()
     break;
     case 8:
     userInfo.displayAccount();
+    terminateORnot();
     break;
     case 9:
     exit(1);

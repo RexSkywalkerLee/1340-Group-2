@@ -4,14 +4,29 @@
 #include<sstream>
 #include<vector>
 #include<map>
+#include<algorithm>
 #include"head.h"
 using namespace std;
+
+
+void info::sortRecord()
+{
+  ifstream fin(user + "_records.txt");
+  vector<string>records; string temp;
+  while (getline(fin, temp)) records.push_back(temp);
+  fin.close();
+  sort(records.begin(), records.end());
+  ofstream fout(user + "_records.txt");
+  for (int i = 0; i < records.size(); i++) fout << records[i] << endl;
+  fout.close();
+}
+
 
 void info::addRecord()
 {
   ofstream fout(user + "_records.txt", ios::app);
   char typeChoice;
-  int amount, recordType, accountType;
+  double amount; int recordType, accountType;
   string day, month, year;
   cout << "Please choose new record type:\n" << "1. Expense (please type \"-\")\n"
        << "2. Income (please type \"+\")\n";
@@ -34,18 +49,15 @@ void info::addRecord()
   cout << "Please choose account type: \n" << "1.Cash\n" << "2.Debit Card\n"
        << "3.Credit Card\n";
   cin >> accountType;
-  fout << typeChoice << ' ' << amount << ' ' << day<<' '<< month <<' '<<year << ' ';
+  fout << year << ' ' << month << ' ' << day << ' ' << typeChoice << ' ';
   if (typeChoice == '-') fout << expense[recordType];
   else fout << income[recordType];
-  fout << ' ' << account[accountType] << endl;
+  fout << ' ' << amount << ' ' << account[accountType] << endl;
   fout.close();
-  updateAccount((typeChoice == '-')?(0-amount):amount, accountType-1); 
-  cout << "\nRecord added! Continue management? (Y/N)" << endl;
-  char finalChoice;
-  cin >> finalChoice;
-  if (finalChoice == 'Y') return;
-  else exit(1);
+  sortRecord();
+  updateAccount();
 }
+
 
 void info::checkRecord()
 {
@@ -71,7 +83,7 @@ void info::checkRecord()
         cin >> tKey2;
         for (int i = 0; i < records.size(); i++){
           istringstream iss(records[i]);
-          for (int j = 0; j < 6; j++) {if (j == 0) iss >> tKey1; else iss >> recordType;}
+          for (int j = 0; j < 5; j++) {if (j == 3) iss >> tKey1; else iss >> recordType;}
           if (tKey1 == '-' && expense[tKey2] == recordType) cout << records[i] << endl;
         }
         break;
@@ -82,7 +94,7 @@ void info::checkRecord()
         cin >> tKey2;
         for (int i = 0; i < records.size(); i++){
           istringstream iss(records[i]);
-          for (int j = 0; j < 6; j++) {if (j == 0) iss >> tKey1; else iss >> recordType;}
+          for (int j = 0; j < 5; j++) {if (j == 0) iss >> tKey1; else iss >> recordType;}
           if (tKey1 == '+' && income[tKey2] == recordType) cout << records[i] << endl;
         }
         break;
@@ -95,7 +107,7 @@ void info::checkRecord()
       for (int i = 0; i < records.size(); i++){
         istringstream iss(records[i]);
         for (int j = 0; j < 7; j++) iss >> record[j];
-        if ((day==record[2])&&(month==record[3])&&(year==record[4])) cout << records[i] << endl;
+        if ((day==record[2])&&(month==record[1])&&(year==record[0])) cout << records[i] << endl;
       }
       break;}
     case 3:{
@@ -109,13 +121,62 @@ void info::checkRecord()
       }
       break;}
   }
+  delete []record;
   fin.close();
-  cout << "\nContinue management? (Y/N)" << endl;
-  char finalChoice;
-  cin >> finalChoice;
-  if (finalChoice == 'Y') return;
-  else exit(1);
+  cout << endl;
 }
 
 
+void info::deleteRecord()
+{
+  
+  ifstream fin(user + "_records.txt");
+  vector<string>records; string* temp = new string;
+  while (getline(fin,*temp)) records.push_back(*temp);
+  fin.close();
+  cout << "Please type in specific infomation of the record you want to delete:\n";
+  cout << "(You can use check function to find the record to be deleted first)\n";
+  cout << "1. check records\n2. straight type in\n";
+  int basicChoice; cin >> basicChoice;
+  if (basicChoice == 1) checkRecord();
+  cout << "Record to be deleted:\n"; cin.get();
+  getline(cin,*temp);
+  ofstream fout(user + "_records.txt");
+  for (int i = 0; i < records.size(); i++){
+    if (records[i] != *temp) fout << records[i] << endl;
+  }
+  fout.close(); delete temp;
+  updateAccount();
+}
+
+
+void info::editRecord()
+{
+  ifstream fin(user + "_records.txt");
+  vector<string>records; string* temp = new string;
+  while (getline(fin,*temp)) records.push_back(*temp);
+  fin.close();
+  cout << "Please type in specific infomation of the record you want to edit:\n";
+  cout << "(You can use check function to find the record to be edited first)\n";
+  cout << "1. check records\n2. straight type in\n";
+  int basicChoice; cin >> basicChoice;
+  if (basicChoice == 1) checkRecord();
+  cout << "Record to be edited:\n";  cin.get();
+  getline(cin,*temp);
+  ofstream fout(user + "_records.txt");
+  for (int i = 0; i < records.size(); i++){
+    if (records[i] != *temp) fout << records[i] << endl;
+    else{
+      fout.close();
+      cout << "Please replace this record by specifying a new record:" << endl;
+      addRecord();
+      fout.open(user + "_records.txt", ios::app);
+    }
+  }
+  fout.close(); delete temp;
+  sortRecord();
+  updateAccount();
+}
+  
+  
 

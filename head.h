@@ -6,13 +6,17 @@
 using namespace std;
 
 string sign();
+void terminateORnot();
 
 class info{
 public:
 
+  void sortRecord();
   void addRecord();
   void checkRecord();
-  void updateAccount(int amount, int type);
+  void editRecord();
+  void deleteRecord();
+  void updateAccount();
   void displayAccount();
   void set(string username) {user = username;}
 
@@ -23,7 +27,7 @@ private:
                                {11,"Shopping"},{12,"Gifts"},{13,"Medical"},{14,"Investment"},{15,"Transfer"},
                                {16,"Rent"},{17,"Cash_Gift"},{18,"Mobile_Bill"},{19,"Visa"},{20,"Other"}};
   map <int, string> income = {{1,"Salary"},{2,"Bonus"},{3,"Allowance"},{4,"Investment"},{5,"Other"}};
-  map <int, string> account = {{1,"Cash"}, {2,"Bank_Card"}, {3,"Credit_Card"}};
+  map <int, string> account = {{1,"Cash"}, {2,"Debit_Card"}, {3,"Credit_Card"}};
 };
 
 #endif
