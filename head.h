@@ -16,8 +16,14 @@ public:
   void checkRecord();
   void editRecord();
   void deleteRecord();
+
   void updateAccount();
   void displayAccount();
+
+  void alertBudget();
+  void setBudget();
+  bool sameMonthBudget();
+
   void set(string username) {user = username;}
 
 private:

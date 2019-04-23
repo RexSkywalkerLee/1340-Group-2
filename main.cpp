@@ -8,6 +8,8 @@ int main()
 {
   info userInfo;
   userInfo.set(sign());
+  if (userInfo.sameMonthBudget()) userInfo.alertBudget();
+  else cout << "Please set budget for a new month!\n\n";
   int choice;
   JumpToPointMain:
   cout << "Please indicate your choice to start account management:\n";
@@ -35,6 +37,7 @@ int main()
     terminateORnot();
     break;
     case 5:
+    userInfo.setBudget();
     break;
     case 6:
     break;
