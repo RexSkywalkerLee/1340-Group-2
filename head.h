@@ -16,12 +16,26 @@ public:
   void checkRecord();
   void editRecord();
   void deleteRecord();
+
+  bool samemonth();
+  double setBudget();
+  void alertBudget();
+
   void updateAccount();
   void displayAccount();
-  void set(string username) {user = username;}
+  void set(string username) {user = username;};
+
+  void retrieve(string keyword);
+  void Mretrieve(string month, string year);
+  double sum();
+  double income1();
+  double expense1();
 
 private:
   string user;
+  double budget;
+  string type,keyword;
+  int index,total;
   map <int, string> expense = {{1,"Breakfast"},{2,"Dinner"},{3,"Snacks"},{4,"Grocery"},{5,"Social"},
                                {6,"Lunch"},{7,"Beverages"},{8,"Traffic"},{9,"Fun"},{10,"Clothing"},
                                {11,"Shopping"},{12,"Gifts"},{13,"Medical"},{14,"Investment"},{15,"Transfer"},

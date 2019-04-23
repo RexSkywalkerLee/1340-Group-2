@@ -3,53 +3,86 @@
 #include<fstream>
 #include<sstream>
 #include<vector>
-#include<cstdlib>
-#include"DataAnalyze.h"
-
+#include"head.h"
 using namespace std;
-void Data::retrieve(){
+
+void info::retrieve(string keyword){
 	ifstream fin( user + "_records.txt");
 	ofstream fout("temp.txt");
-	vector<string> records; 
-        string* record = new string[7]; 
-	string temp;
-while (getline(fin, temp)) records.push_back(temp);
-  for (int i = 0; i < records.size(); i++){
-	  istringstream iss(records[i]);
-    for (int i = 0; iss >> record[i]; i++);
-    if (record[index] == keyword) fout << records[i] << endl;
+	vector<string> records;
+    vector<string> record;
+    for (int i = 0; i < records.size(); i++){
+	istringstream iss(records[i]);
+    for (int j = 0; j < 7; j++) iss >> record[j];
+    if (record[index]==keyword) fout<<records[i]<<endl;
 	}
 	fin.close();
 	fout.close();}
 
-int Data::TypetoIndex(string type){
-	switch (type){
-    case "Yreport":
-    return 4 ;
-    break;
-    case "recordType":
-    return 5;
-    break;
-    case "accountType":
-    return 6;
-    break;
-};
-
-double Data::sum(){
-	ifstream fin("temp.txt");
-	vector<string> records; 
-  string* record = new string[7];
-  double total = 0;
-	string temp;
-	while (getline(fin, temp)) records.push_back(temp);
-	for (int i = 0; i < records.size(); i++){
+void info::Mretrieve(string month, string year){//month
+	ifstream fin( user + "_records.txt");
+	ofstream fout("temp.txt");
+	vector<string> records;
+    vector<string> record;
+    for (int i = 0; i < records.size(); i++){
 	istringstream iss(records[i]);
-  for (int i = 0; iss >> record[i]; i++);
-  int amount = atoi(record[1].c_str());
-  total += (record[0] == "-") ? (0 - amount) : amount;
+    for (int j = 0; j < 7; j++) iss >> record[j];
+    if ((record[1]==month)&&(record[0]==year)) fout<<records[i]<<endl;
 	}
-	delete []record;
+	fin.close();
+	fout.close();}
+
+
+double info::sum(){
+	ifstream fin("temp.txt");
+	vector<string> records;
+    vector<string> record;
+    double total=0;
+	for (int i = 0; i < records.size(); i++)
+	{
+
+	istringstream iss(records[i]);
+    for (int j = 0; j < 7; j++)
+		{ iss >> record[j];
+       	double amount=stod(record[1]);
+       	if  (record[3]=='-') amount=(0-amount);//����income expense ��total
+		  total+=amount;
+	    }
+	}
 	fin.close();
 	return total;
 }
 
+double info::expense1(){
+	ifstream fin("temp.txt");
+	vector<string> records;
+    vector<string> record;
+    double total=0;
+	for (int i = 0; i < records.size(); i++)
+	{	istringstream iss(records[i]);
+    for (int j = 0; j < 7; j++)
+		{ iss >> record[j];
+       	double amount=stod(record[1]);
+       	if  (record[3]=='-') total+=amount;// expense ��total
+	    }
+	}
+	fin.close();
+	return total;
+}
+
+double info::income1(){
+	ifstream fin("temp.txt");
+	vector<string> records;
+    vector<string> record;
+    double total=0;
+	for (int i = 0; i < records.size(); i++)
+	{	istringstream iss(records[i]);
+    for (int j = 0; j < 7; j++)
+		{ iss >> record[j];
+       	double amount=stod(record[4]);
+       	if  (record[3]=='+') total+=amount;
+	    }
+	}
+	fin.close();
+	return total;
+}

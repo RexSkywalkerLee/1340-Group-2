@@ -1,12 +1,17 @@
-otherFunctions.o: otherFunctions.cpp head.h 
+otherFunctions.o: otherFunctions.cpp head.h
 	g++ -pedantic-errors -std=c++11 -c $<
-accountsManipulation.o: accountsManipulation.cpp head.h 
+accountsManipulation.o: accountsManipulation.cpp head.h
 	g++ -pedantic-errors -std=c++11 -c $<
-recordsManipulation.o: recordsManipulation.cpp head.h 
+recordsManipulation.o: recordsManipulation.cpp head.h
 	g++ -pedantic-errors -std=c++11 -c $<
-main.o: main.cpp head.h 
+budget.o: budget.cpp head.h
 	g++ -pedantic-errors -std=c++11 -c $<
-main: main.o otherFunctions.o recordsManipulation.o accountsManipulation.o
+DataAnalyze.o: DataAnalyze.cpp head.h
+	g++ -pedantic-errors -std=c++11 -c $<
+main.o: main.cpp head.h
+	g++ -pedantic-errors -std=c++11 -c $<
+
+main: main.o otherFunctions.o recordsManipulation.o accountsManipulation.o budget.o DataAnalyze.o
 	g++ $^ -o $@
 clean:
 	rm *.o main

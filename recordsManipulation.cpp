@@ -63,7 +63,7 @@ void info::checkRecord()
 {
   ifstream fin(user + "_records.txt");
   vector<string> records; string temp;
-  string* record = new string[7]; 
+  string* record = new string[7];
   while (getline(fin, temp)) records.push_back(temp);
   int choice1;
   cout << "Please indicate the way you are searching by:\n" << "1. Type\n" << "2. Date\n"
@@ -129,7 +129,7 @@ void info::checkRecord()
 
 void info::deleteRecord()
 {
-  
+
   ifstream fin(user + "_records.txt");
   vector<string>records; string* temp = new string;
   while (getline(fin,*temp)) records.push_back(*temp);
@@ -177,6 +177,3 @@ void info::editRecord()
   sortRecord();
   updateAccount();
 }
-  
-  
-

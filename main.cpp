@@ -14,6 +14,8 @@ int main()
   cout << "1. Add\n" << "2. Check\n" << "3. Edit\n" << "4. Delete\n"
        << "5. Set Budget\n" << "6. Report\n" << "7. Latest\n" <<"8. Accounts information\n" << "9. Exit\n";
   cin >> choice;
+  userInfo.alertBudget();
+  if(!userInfo.samemonth()) userInfo.setBudget();
   switch (choice){
     case 1:
     userInfo.addRecord();
@@ -35,6 +37,7 @@ int main()
     terminateORnot();
     break;
     case 5:
+    userInfo.setBudget();
     break;
     case 6:
     break;
