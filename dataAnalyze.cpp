@@ -7,9 +7,9 @@
 #include"DataAnalyze.h"
 
 using namespace std;
-void Data::retrieve(){
+void info::retrieve(){
 	ifstream fin( user + "_records.txt");
-	ofstream fout("temp.txt");
+        
 	vector<string> records; 
         string* record = new string[7]; 
 	string temp;

@@ -37,21 +37,21 @@ void info::addRecord()
   cin >> day >> month >> year ;
   cout << "Please choose the type from following: \n";
   if (typeChoice == '-'){
-    cout << "1.Breakfast" << "\t2.Dinner" << "\t3.Snacks" << "\t4.Grocery" << "\t5.Social" << endl;
-    cout << "6.Lunch" << "\t\t7.Beverages" << "\t8.Traffic" << "\t9.Fun" << "\t\t10.Clothing" << endl;
-    cout << "11.Shopping" << "\t12.Gifts" << "\t13.Medical" << "\t14.Investment" << "\t15.Transfer" << endl;
-    cout << "16.Rent" << "\t\t17.Cash_Gift" << "\t18.Mobile_Bill" << "\t19.Visa" << "\t\t20.Other" << endl;
+    cout << "1.Breakfast" << "\t2.Dinner" << "\t3.Snacks" << "\t4.Grocery" << "\t\t5.Social" << endl;
+    cout << "6.Lunch" << "\t\t7.Beverages" << "\t8.Traffic" << "\t9.Fun" << "\t\t\t10.Clothing" << endl;
+    cout << "11.Shopping" << "\t12.Gifts" << "\t13.Medical" << "\t14.Investment_Expense" << "\t15.Transfer" << endl;
+    cout << "16.Rent" << "\t\t17.Cash_Gift" << "\t18.Mobile_Bill" << "\t19.Visa" << "\t\t\t20.Other_Expense" << endl;
   }
   else{
-    cout << "1.Salary" << "\t2.Bonus" << "\t\t3.Allowance" << "\t4.Investment" << "\t5.Other" << endl;
+    cout << "1.Salary" << "\t2.Bonus" << "\t\t3.Allowance" << "\t4.Investment_Income" << "\t5.Other_Income" << endl;
   }
   cin >> recordType;
   cout << "Please choose account type: \n" << "1.Cash\n" << "2.Debit Card\n"
        << "3.Credit Card\n";
   cin >> accountType;
   fout << year << ' ' << month << ' ' << day << ' ' << typeChoice << ' ';
-  if (typeChoice == '-') fout << expense[recordType];
-  else fout << income[recordType];
+  if (typeChoice == '-') fout << balance[recordType-1];
+  else fout << balance[recordType+19];
   fout << ' ' << amount << ' ' << account[accountType] << endl;
   fout.close();
   sortRecord();
@@ -76,26 +76,26 @@ void info::checkRecord()
       cin >> tKey1;
       if (tKey1 == '-'){
         cout << "Please type in the type your search by:\n";
-        cout << "1.Breakfast" << "\t2.Dinner" << "\t3.Snacks" << "\t4.Grocery" << "\t5.Social" << endl;
-        cout << "6.Lunch" << "\t\t7.Beverages" << "\t8.Traffic" << "\t9.Fun" << "\t\t10.Clothing" << endl;
-        cout << "11.Shopping" << "\t12.Gifts" << "\t13.Medical" << "\t14.Investment" << "\t15.Transfer" << endl;
-        cout << "16.Rent" << "\t\t17.Cash_Gift" << "\t18.Mobile_Bill" << "\t19.Visa" << "\t\t20.Other" << endl;
+        cout << "1.Breakfast" << "\t2.Dinner" << "\t3.Snacks" << "\t4.Grocery" << "\t\t5.Social" << endl;
+        cout << "6.Lunch" << "\t\t7.Beverages" << "\t8.Traffic" << "\t9.Fun" << "\t\t\t10.Clothing" << endl;
+        cout << "11.Shopping" << "\t12.Gifts" << "\t13.Medical" << "\t14.Investment_Expense" << "\t15.Transfer" << endl;
+        cout << "16.Rent" << "\t\t17.Cash_Gift" << "\t18.Mobile_Bill" << "\t19.Visa" << "\t\t\t20.Other_Expense" << endl;
         cin >> tKey2;
         for (int i = 0; i < records.size(); i++){
           istringstream iss(records[i]);
           for (int j = 0; j < 5; j++) {if (j == 3) iss >> tKey1; else iss >> recordType;}
-          if (tKey1 == '-' && expense[tKey2] == recordType) cout << records[i] << endl;
+          if (tKey1 == '-' && balance[tKey2-1] == recordType) cout << records[i] << endl;
         }
         break;
       }
       else{
         cout << "Please type in the type your search by:\n";
-        cout << "1.Salary" << "\t2.Bonus" << "\t\t3.Allowance" << "\t4.Investment" << "\t5.Other" << endl;
+        cout << "1.Salary" << "\t2.Bonus" << "\t\t3.Allowance" << "\t4.Investment_Income" << "\t5.Other_Income" << endl;
         cin >> tKey2;
         for (int i = 0; i < records.size(); i++){
           istringstream iss(records[i]);
           for (int j = 0; j < 5; j++) {if (j == 0) iss >> tKey1; else iss >> recordType;}
-          if (tKey1 == '+' && income[tKey2] == recordType) cout << records[i] << endl;
+          if (tKey1 == '+' && balance[tKey2+19] == recordType) cout << records[i] << endl;
         }
         break;
       }
