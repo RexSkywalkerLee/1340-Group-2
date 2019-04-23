@@ -6,16 +6,29 @@
 #include"head.h"
 
 using namespace std;
-void info::alertBudget(){
+
+void info::updateBudget()
+{
         ifstream fin(user + "_budget.txt");
         double totalBudget;
-        cin >> totalbudget;
-	double remainBudget = totalBudget - sum();
-        cout << "Remain Budget " << remainBudget << '/'
+        for (int i = 0; i < 3; i++) fin >> totalBudget;
+        fin.close();
+        fin.open(user + "_records.txt");
+        string temp; double sum; int key;
+        while (getline(fin, temp)){
+          istringstream iss(temp);
+          for (int i = 0; i < 6; i++) iss >> temp;
+          for (int i = 0; i < 25; i++)
+            if (balance[i] == temp) key = i;
+          sum += key > 20 ? 0 - atof(temp.c_str()) : atof(temp.c_str());
+        }
+	double remainBudget = totalBudget - sum;
+        cout << "Remain Budget " << remainBudget << " / "
              << "Total Budget " << totalBudget << endl;
 	if (remainBudget < 0) cout <<"Alert! Beyond Budget" << endl;
 	else cout << endl; 
 }
+
 
 void info::setBudget(){
 	double budget;
@@ -25,18 +38,30 @@ void info::setBudget(){
         cin >> month >> year;
 	cout << "Reset your total budget as: ";
 	cin >> budget;
-	fout << year << month << budget;
+	fout << year << ' ' << month << ' ' << budget;
 	fout.close();
 	
 }
+
+
+bool info::checkBudget()
+{
+  ifstream fin(user + "_budget.txt");
+  if (fin.fail()) return 0;
+  else return 1;
+}
+
+
 bool info::sameMonthBudget(){
-        string budgetDate, recordDate;
+        string budgetDate, recordDate, temp;
         ifstream fin(user + "_budget.txt");
+        if (fin.fail()) return 0;
         getline(fin, budgetDate);
         fin.close();
         fin.open(user + "_records.txt");
-        while (getline(fin, recordDate));
+        while (getline(fin, temp)) recordDate = temp;
+        fin.close();
         if (budgetDate.substr(0,7) == recordDate.substr(0,7)) return 1;
-        else return 0;	
+        else return 0;
 }
 

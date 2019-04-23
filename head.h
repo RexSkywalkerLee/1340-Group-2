@@ -20,19 +20,22 @@ public:
   void updateAccount();
   void displayAccount();
 
-  void alertBudget();
+  void updateBudget();
   void setBudget();
+  bool checkBudget();
   bool sameMonthBudget();
+
+  void report();
 
   void set(string username) {user = username;}
 
 private:
   string user;
-  map <int, string> expense = {{1,"Breakfast"},{2,"Dinner"},{3,"Snacks"},{4,"Grocery"},{5,"Social"},
-                               {6,"Lunch"},{7,"Beverages"},{8,"Traffic"},{9,"Fun"},{10,"Clothing"},
-                               {11,"Shopping"},{12,"Gifts"},{13,"Medical"},{14,"Investment"},{15,"Transfer"},
-                               {16,"Rent"},{17,"Cash_Gift"},{18,"Mobile_Bill"},{19,"Visa"},{20,"Other"}};
-  map <int, string> income = {{1,"Salary"},{2,"Bonus"},{3,"Allowance"},{4,"Investment"},{5,"Other"}};
+  map <int, string> balance = {{0,"Breakfast"},{1,"Dinner"},{2,"Snacks"},{3,"Grocery"},{4,"Social"},
+                               {5,"Lunch"},{6,"Beverages"},{7,"Traffic"},{8,"Fun"},{9,"Clothing"},
+                               {10,"Shopping"},{11,"Gifts"},{12,"Medical"},{13,"Investment_Expense"},{14,"Transfer"},
+                               {15,"Rent"},{16,"Cash_Gift"},{17,"Mobile_Bill"},{18,"Visa"},{19,"Other_Expense"},
+                               {20,"Salary"},{21,"Bonus"},{22,"Allowance"},{23,"Investment_Income"},{24,"Other_Income"}};
   map <int, string> account = {{1,"Cash"}, {2,"Debit_Card"}, {3,"Credit_Card"}};
 };
 
