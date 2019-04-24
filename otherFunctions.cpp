@@ -11,7 +11,6 @@ string sign_up();
 string sign_in();
 void terminateORnot();
 
-
 int panel()
 {
   int choice;
