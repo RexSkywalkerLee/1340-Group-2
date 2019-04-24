@@ -41,20 +41,21 @@ void info::latest(){
     date[i]=to_string(year)+" "+month1+" "+day1;
   }
     ifstream fin(user + "_records.txt");
-    string record,tempNum;
+    string record;
     while (getline(fin,record)){
       for (int i=0;i<7;i++){
         if(record.find(date[i])!=-1){
           istringstream iss(record);
-          for (int j = 0; j < 6; j++) iss >> tempNum;
-          daily[i] += atof(tempNum.c_str());
+          string temp[7];
+          for (int j = 0; j < 6; j++) iss >> temp[j];
+          daily[i] += (record.find("+")? atof(temp[5].c_str()):(0-atof(temp[5].c_str())));
         }
       }
     }
   float unit;
-  cout<<"You wish one \'+\' represents: "<<endl;
+  cout<<"You wish one \'+\' represents  $"<<endl;
   cin>>unit;
-  cout<<"So one \'-\' represents - "<<unit <<endl;
+  cout<<"So one \'-\' represents -$"<<unit <<endl;
   for (int j=0;j<7;j++){
     cout<<date[j]<<"  ";
     string* unitnum= new string[7];
