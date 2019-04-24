@@ -48,12 +48,12 @@ void info::latest(){
           istringstream iss(record);
           string temp[7];
           for (int j = 0; j < 6; j++) iss >> temp[j];
-          daily[i] += (record.find("+")? atof(temp[5].c_str()):(0-atof(temp[5].c_str())));
+          daily[i] += (record.find("+")!=11? (0-atof(temp[5].c_str())):atof(temp[5].c_str()));
         }
       }
     }
   float unit;
-  cout<<"You wish one \'+\' represents  $"<<endl;
+  cout<<"You wish one \'+\' represents  $";
   cin>>unit;
   cout<<"So one \'-\' represents -$"<<unit <<endl;
   for (int j=0;j<7;j++){
