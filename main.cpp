@@ -14,7 +14,6 @@ int main()
     else cout << "Please set budget for a new month!\n\n";
   }
   else cout << "You don't have your budget yet. Please set a budget!";
-
   int choice;
   cout << "Please indicate your choice to start account management:\n";
   cout << "1. Add\n" << "2. Check\n" << "3. Edit\n" << "4. Delete\n"

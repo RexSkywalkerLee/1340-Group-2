@@ -26,7 +26,6 @@ public:
   bool sameMonthBudget();
 
   void latest();
-
   void report();
 
   void set(string username) {user = username;}

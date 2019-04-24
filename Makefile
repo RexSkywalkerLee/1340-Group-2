@@ -1,8 +1,8 @@
 otherFunctions.o: otherFunctions.cpp head.h
 	g++ -pedantic-errors -std=c++11 -c $<
-accounts.o: accounts.cpp head.h
+accounts.o: accounts.cpp head.h 
 	g++ -pedantic-errors -std=c++11 -c $<
-records.o: records.cpp head.h
+records.o: records.cpp head.h 
 	g++ -pedantic-errors -std=c++11 -c $<
 budget.o: budget.cpp head.h
 	g++ -pedantic-errors -std=c++11 -c $<
