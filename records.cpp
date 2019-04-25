@@ -139,7 +139,8 @@ void info::checkRecord()
         }
         break;}
     }
-    cout << "\n1.Further check\n2.Abort\n";
+    if (tempRecords.size() == 0) cout << "Whoops! No records found." << endl;
+    cout << "\n1.Further check\n2.No need for further check\n";
     cin >> choice1;
     records = tempRecords;
     for (int i = 0; i < tempRecords.size(); i++) tempRecords.pop_back();

@@ -47,6 +47,7 @@ void info::updateAccount()
 void info::displayAccount(){
     string item;
     cout<<"\nAccount information of "<<user<< ':' << endl;
+    cout << "Initial accounts information: ";
     ifstream fin(user + "_account.txt");
     while (getline(fin, item)) cout<<item<<endl;
     fin.close();

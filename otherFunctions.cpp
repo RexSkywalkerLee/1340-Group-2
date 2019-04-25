@@ -103,10 +103,10 @@ string sign()
 
 void terminateORnot()
 {
-  cout <<"Continue management? (Y/N)" << endl;
+  cout <<"Continue management? (y/n)" << endl;
   char finalChoice;
   cin >> finalChoice;
-  if (finalChoice == 'Y'){
+  if (finalChoice == 'y'){
     cout << endl;
     return;
   }
