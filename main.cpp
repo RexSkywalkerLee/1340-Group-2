@@ -49,6 +49,7 @@ int main()
     userInfo.displayAccount();
     break;
     case 9:
+    cout << "Bye bye!" << endl;
     exit(1);
     default:
     cout << "Invalid input. Please try again." << endl;

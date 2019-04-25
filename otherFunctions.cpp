@@ -106,6 +106,9 @@ void terminateORnot()
   cout <<"Continue management? (Y/N)" << endl;
   char finalChoice;
   cin >> finalChoice;
-  if (finalChoice == 'Y') return;
+  if (finalChoice == 'Y'){
+    cout << endl;
+    return;
+  }
   else exit(1);
 }

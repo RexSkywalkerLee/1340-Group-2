@@ -52,14 +52,14 @@ void info::latest(){
         }
       }
     }
-  float unit;
+  double unit;
   cout<<"You wish one \'+\' represents  $";
   cin>>unit;
   cout<<"So one \'-\' represents -$"<<unit <<endl;
   for (int j=0;j<7;j++){
     cout<<date[j]<<"  ";
     string* unitnum= new string[7];
-    unitnum[j]= daily[j]>0? string(daily[j]/unit,'+'):string(abs(daily[j]/unit),'-');
+    unitnum[j]= daily[j]>0? string(int(daily[j]/unit),'+'):string(abs(int(daily[j]/unit)),'-');
     cout<<unitnum[j]<<endl;
   }
 }
