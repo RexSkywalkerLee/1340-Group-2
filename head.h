@@ -1,6 +1,7 @@
 #ifndef head_h
 #define head_h
 #include<string>
+#include<vector>
 #include<map>
 
 using namespace std;
@@ -32,6 +33,7 @@ public:
 
 private:
   string user;
+  vector <string> tempRecords;
   map <int, string> balance = {{0,"Breakfast"},{1,"Dinner"},{2,"Snacks"},{3,"Grocery"},{4,"Social"},
                                {5,"Lunch"},{6,"Beverages"},{7,"Traffic"},{8,"Fun"},{9,"Clothing"},
                                {10,"Shopping"},{11,"Gifts"},{12,"Medical"},{13,"Investment_Expense"},{14,"Transfer"},

@@ -1,16 +1,16 @@
-otherFunctions.o: otherFunctions.cpp head.h
+otherFunctions.o: otherFunctions.cpp
 	g++ -pedantic-errors -std=c++11 -c $<
-accounts.o: accounts.cpp head.h 
+accounts.o: accounts.cpp
 	g++ -pedantic-errors -std=c++11 -c $<
-records.o: records.cpp head.h 
+records.o: records.cpp 
 	g++ -pedantic-errors -std=c++11 -c $<
-budget.o: budget.cpp head.h
+budget.o: budget.cpp
 	g++ -pedantic-errors -std=c++11 -c $<
-report.o: report.cpp head.h
+report.o: report.cpp
 	g++ -pedantic-errors -std=c++11 -c $<
-latest.o: latest.cpp head.h
+latest.o: latest.cpp
 	g++ -pedantic-errors -std=c++11 -c $<
-main.o: main.cpp head.h
+main.o: main.cpp
 	g++ -pedantic-errors -std=c++11 -c $<
 main: main.o otherFunctions.o records.o accounts.o budget.o report.o latest.o
 	g++ $^ -o $@
