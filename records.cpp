@@ -101,7 +101,7 @@ void info::checkRecord()
           cout << endl;
           for (int i = 0; i < records.size(); i++){
             istringstream iss(records[i]);
-            for (int j = 0; j < 5; j++) {if (j == 0) iss >> tKey1; else iss >> recordType;}
+            for (int j = 0; j < 5; j++) {if (j == 3) iss >> tKey1; else iss >> recordType;}
             if (tKey1 == '+' && balance[tKey2+19] == recordType){
               cout << records[i] << endl;
               tempRecords.push_back(records[i]);
