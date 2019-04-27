@@ -31,16 +31,19 @@ Overall system panel:
 9. Exit
 ```
 
-1. - Add recordspe
+1. - Add records
    - Assumptions: When user types in 1, the system opens a file and writes in the record, the user will be asked to type in record's type, amount, date, and account information sequentially.
-   - 
+   - Format stored in *_records.txt*: yyyy mm dd -/+ Specific_Type 100.00 Account_Type 
+     (for more details about add function please refer to *Sample implementation.pdf*)
 
-3. - Statement: Users could view their records by date, type, and account so that users can look up for specific records by various information.
-   - Assumptions: When user types in a specific keyword (e.g., check), the system opens the file containing the records and then searches for corresponding records according to the date/type/account the user input.
-     - i.e., Search by: date   Search for: 01/03/2019
-
-4. - Statement: Users could delete and edit any record at any time so that users can correct their mistakes when recording financial states.
-   - Assumptions: When user types in a specific keyword (e.g., delete/edit), the system opens the file containing the records and receives input (record information of the record to be deleted/edited) from the user, search for the specific record in the file. Then, the user can input another record to replace the original one(automatically replacing the original one with an empty record if the command was "delete").
+2. - Check records
+   - Assumptions: When user types in 2, the system opens the file containing the records and then searches for corresponding records according to the date/type/account the user input.
+   - i.e., Search by: date   Search for: 01/03/2019
+     **All records found would be automatically numbered, which can be used for further check or delete and edit functions**
+     (for more details about add function please refer to *Sample implementation.pdf*)
+     
+3. - Edit records
+   - Assumptions: When user types in 3, the system opens the file containing the records and receives input (record information of the record to be deleted/edited) from the user, search for the specific record in the file. Then, the user can change single or multiple dimensions of this record.
 
 5. - Statement: Users can monthly reset the budget and edit it at any time. When expenses reach the budget, there will be an alert from the system. Hence, users can flexibly change their financial plan and make sure that the expenses will not be beyond expectations.
    - Assumptions: Each user has a file containing budget information. The system allows users to add, reset and edit their total budgets. This feature can open the file containing records and retrieve information, then calculate the remaining budgets and send out an alert when the remaining budget is below a predefined number.  
