@@ -3,6 +3,7 @@
 #include<fstream>
 #include<sstream>
 #include<vector>
+#include<cctype>
 #include"head.h"
 
 using namespace std;
@@ -13,16 +14,21 @@ void info::updateBudget()
 {
         ifstream fin(user + "_budget.txt");
         double totalBudget;
-        for (int i = 0; i < 3; i++) fin >> totalBudget;
+        string budgetDate, temp;
+        getline(fin, temp);
         fin.close();
+        budgetDate = temp.substr(0,7);
+        totalBudget = atof(temp.substr(8).c_str());
         fin.open(user + "_records.txt");
-        string temp; double sum; int key;
+        double sum = 0; int key;
         while (getline(fin, temp)){
           istringstream iss(temp);
+          if (budgetDate != temp.substr(0,7))
+            continue;
           for (int i = 0; i < 6; i++) iss >> temp;
           for (int i = 0; i < 25; i++)
             if (balance[i] == temp) key = i;
-          sum += key > 20 ? 0 - atof(temp.c_str()) : atof(temp.c_str());
+          sum += key > 19 ? 0 - atof(temp.c_str()) : atof(temp.c_str());
         }
 	double remainBudget = totalBudget - sum;
         cout << "Remain Budget " << remainBudget << " / "
@@ -65,6 +71,7 @@ bool info::sameMonthBudget(){
         fin.open(user + "_records.txt");
         while (getline(fin, temp)) recordDate = temp;
         fin.close();
+        if (recordDate.length() == 0) return 1;
         if (budgetDate.substr(0,7) == recordDate.substr(0,7)) return 1;
         else return 0;
 }
