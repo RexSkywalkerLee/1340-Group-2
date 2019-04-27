@@ -64,14 +64,18 @@ bool info::checkBudget()
   ifstream fin(user + "_budget.txt");
   if (fin.fail()) 
 	  return 0;
-  else return 1;
+  else{
+	  fin.close();
+	  return 1;
+  }
+  
 }
 
 
 //check whether newliest record and last record are in the same month
 //make sure user set budget monthly
 bool info::sameMonthBudget(){
-        string budgetDate, recordDate, temp;
+        string budgetDate, recordDate = "", temp;
         ifstream fin(user + "_budget.txt");
         if (fin.fail()) 
 		return 0;
