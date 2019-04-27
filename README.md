@@ -97,8 +97,19 @@ Overall system panel:
    - (for more details about this function please refer to *Sample implementation.pdf*). 
 
 
-7. - Statement: Users can check their accounts information at any time; account information includes credit card invoice, bank account balance, etc.; accounts information will be automatically updated each time the user adds ( or delete/edit) expense or income records. Therefore, users can hold a clear idea about each account's information timely and have a quick response to any significant change of the balance.
-   - Assumptions: Each user has a file containing the account information(the initial account information should be stored in this file the time a user signs up). Each time the user adds (edit, delete) a record, the system automatically opens this account-information file and updates the account information. When the user types in a specific keyword to ask to check account information, the system opens this file and displays the contents.  
+Account Information
+Statement: Users can request a report of each day's balance(graphically) of the latest seven days 
+Assumptions: Each user has a file containing the account information(the initial account information should be stored in this file the time a user signs up). Each time the user adds (edit, delete) a record, the system automatically updates the account information.  The system will display the account information when users requests.
+Sample:
+Account information of user: 
+Initial accounts information : 100 100 100
+Cash -200
+...
+...
+(for more details about this function please refer to Sample implementation.pdf)
+
+
+
 
 8. - Statement: Users can request a report of each day's balance(graphically) of the latest seven days so that the records of the most recent seven days can be represented more concisely and straightforwardly;
    - Assumptions: When user types in a specific keyword to ask for a late report, the system opens the file containing records and retrieves records of the latest seven days, then calculates each day's balance. The balance's value is then illustrated by the number of special characters(e.g., &, *).The report will be formed by listing the date and graphical balance of each day sequentially.
