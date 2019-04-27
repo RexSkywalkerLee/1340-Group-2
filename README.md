@@ -6,13 +6,34 @@ Before using the system:
  - Use `make main` to compile the source files.
  - Use `./main` to execute the file.
  
-1. Sign up and Sign in
+0. Sign up and Sign in
    - Assumptions: When one user signs up, the system will require him/her to set a username and password, and create various files to keep track of the user's financial states. Later user can sign in the system using their username and password. Also, all the usernames and corresponding passwords are stored in a specific file. 
+   - sign panel:
+     ```
+     1. sign up
+     2. sign in
+     3. exit
+     ```
+     1: Create a new account with respective username, password, and files attracting financial status;
+     2: Enter accouting system if you already have an account;
+     3: Exit the program.
+
+Overall system panel:
+```
+1. Add
+2. Check
+3. Edit
+4. Delete
+5. Set Budget
+6. Report
+7. Latest
+8. Accounts Information
+9. Exit
+```
+
+1. - Add recordspe
+   - Assumptions: When user types in 1, the system opens a file and writes in the record, the user will be asked to type in record's type, amount, date, and account information sequentially.
    - 
-   
-2. - Statement: Users can add records which contain information like amount, date, types of income or expense (e.g., food, game, salary, etc.), account (e.g.cash, bank card, credit card, etc.) so that users can check their detailed transaction records later on. 
-   - Assumptions: When user types in a specific keyword (e.g., add), the system opens a file and writes in the record.
-     - format: (+/-)amount dd/mm/yyyy type account (i.e., -100 29/03/2019 breakfast cash)
 
 3. - Statement: Users could view their records by date, type, and account so that users can look up for specific records by various information.
    - Assumptions: When user types in a specific keyword (e.g., check), the system opens the file containing the records and then searches for corresponding records according to the date/type/account the user input.
