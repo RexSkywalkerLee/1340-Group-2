@@ -79,7 +79,7 @@ Overall system panel:
 8. - Statement: Users can request a report of each day's balance(graphically) of the latest seven days so that the records of the most recent seven days can be represented more concisely and straightforwardly;
    - Assumptions: When user types in a specific keyword to ask for a late report, the system opens the file containing records and retrieves records of the latest seven days, then calculates each day's balance. The balance's value is then illustrated by the number of special characters(e.g., &, *).The report will be formed by listing the date and graphical balance of each day sequentially.
 
-###Remarks:
+### Remarks:
 
-1.`Sample implementation.pdf ` illustrates how nine main functions are implemented and the specific procedures to realize the features. Assessors can observe how our project performs without running the program through this document.   
-2.`sample users information.zip` contains two users' account information, including records, accounts, budgets, and userinfo.txt(all users' usernames and passwords) . Assessors can test special functions(like further checking records ) based on these files.
+1.*Sample implementation.pdf* illustrates how nine main functions are implemented and the specific procedures to realize the features. Assessors can observe how our project performs without running the program through this document.   
+2.*sample users information.zip* contains two users' account information, including records, accounts, budgets, and userinfo.txt(all users' usernames and passwords) . Assessors can test special functions(like further checking records ) based on these files.
