@@ -22,16 +22,18 @@ void info::updateBudget()
         totalBudget = atof(temp.substr(8).c_str());
         fin.open(user + "_records.txt");
         double sum = 0; 
-	int key;
+	string key;
         while (getline(fin, temp)){
           istringstream iss(temp);
           if (budgetDate != temp.substr(0,7))
             continue;
-          for (int i = 0; i < 6; i++) 
-            iss >> temp;
-          for (int i = 0; i < 25; i++)
-            if (balance[i] == temp) key = i;
-          sum += key > 19 ? 0 - atof(temp.c_str()) : atof(temp.c_str());
+          for (int i = 0; i < 6; i++){
+            if (i == 3)
+	      cin >> key;
+            else
+              iss >> temp;
+	  }
+          sum += key == "-" ? 0 - atof(temp.c_str()) : atof(temp.c_str());
         }
 	double remainBudget = totalBudget - sum;
         cout << "Remain Budget " << remainBudget << " / "
