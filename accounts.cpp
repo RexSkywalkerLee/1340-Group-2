@@ -10,23 +10,32 @@ using namespace std;
 void info::updateAccount()//automatically update accounts.txt infomation when records.txt is edited.
 {
     ifstream fin(user + "_records.txt");
-    vector<string> records; string temp;
-    while (getline(fin,temp)) records.push_back(temp);
+    vector<string> records; 
+    string temp;
+    while (getline(fin,temp)) 
+        records.push_back(temp);
     fin.close();
     double Accounts[3], info[3];
     fin.open(user + "_account.txt");
     for (int i = 0; i < 3; i++){
-      fin >> info[i]; Accounts[i] = info[i];
+      fin >> info[i]; 
+      Accounts[i] = info[i];
     }
     fin.close();
     
-    char type; string aType; double amount;
+    char type; string aType; 
+    double amount;
     for (int i = 0; i < records.size(); i++){
       istringstream iss(records[i]);
       for (int j = 0; j < 7; j++){
-        if (j == 3) iss >> type;
-        else if (j == 5) {iss >> temp; amount = atof(temp.c_str());}
-        else iss >> aType;
+        if (j == 3) 
+            iss >> type;
+        else if (j == 5){
+            iss >> temp; 
+            amount = atof(temp.c_str());
+        }
+        else 
+            iss >> aType;
 
         if (aType == "Cash") 
           Accounts[0] += (type == '-')?(0-amount):amount;
@@ -37,7 +46,8 @@ void info::updateAccount()//automatically update accounts.txt infomation when re
       }
     }
     ofstream fout(user + "_account.txt");
-    for (int i = 0; i < 3; i++) fout << info[i] << ' ';
+    for (int i = 0; i < 3; i++) 
+      fout << info[i] << ' ';
     fout << endl;
     for (int i = 0; i < 3; i++) 
       fout << account[i+1] << ' ' << Accounts[i] << endl;
@@ -50,7 +60,8 @@ void info::displayAccount(){ // display the user's account infomation(cash, cred
     cout<<"\nAccount information of "<<user<< ':' << endl;
     cout << "Initial accounts information: ";
     ifstream fin(user + "_account.txt");
-    while (getline(fin, item)) cout<<item<<endl;
+    while (getline(fin, item)) 
+        cout<<item<<endl;
     fin.close();
     cout << endl;
 }

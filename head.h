@@ -8,10 +8,12 @@ using namespace std;
 
 string sign();
 void terminateORnot();
+void emptyTemp();
 
 class info{
 public:
 
+  void emptyTemp();
   void sortRecord();
   void addRecord();
   void checkRecord();

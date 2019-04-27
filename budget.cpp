@@ -3,9 +3,11 @@
 #include<fstream>
 #include<sstream>
 #include<vector>
+#include<cctype>
 #include"head.h"
 
 using namespace std;
+
 
 //update total budget & remain budget when accounts infomation changes
 //send alert to user when remaining budget is negative
@@ -13,22 +15,33 @@ void info::updateBudget()
 {
         ifstream fin(user + "_budget.txt");
         double totalBudget;
-        for (int i = 0; i < 3; i++) fin >> totalBudget;
+        string budgetDate, temp;
+        getline(fin, temp);
         fin.close();
+        budgetDate = temp.substr(0,7);
+        totalBudget = atof(temp.substr(8).c_str());
         fin.open(user + "_records.txt");
-        string temp; double sum; int key;
+        double sum = 0; 
+	string key;
         while (getline(fin, temp)){
           istringstream iss(temp);
-          for (int i = 0; i < 6; i++) iss >> temp;
-          for (int i = 0; i < 25; i++)
-            if (balance[i] == temp) key = i;
-          sum += key > 20 ? 0 - atof(temp.c_str()) : atof(temp.c_str());
+          if (budgetDate != temp.substr(0,7))
+            continue;
+          for (int i = 0; i < 6; i++){
+            if (i == 3)
+	      iss >> key;
+            else
+              iss >> temp;
+	  }
+          sum += key == "+" ? 0 - atof(temp.c_str()) : atof(temp.c_str());
         }
 	double remainBudget = totalBudget - sum;
         cout << "Remain Budget " << remainBudget << " / "
              << "Total Budget " << totalBudget << endl;
-	if (remainBudget < 0) cout <<"Alert! Beyond Budget" << endl;
-	else cout << endl; 
+	if (remainBudget < 0) 
+		cout <<"Alert! Beyond Budget" << endl;
+	else 
+		cout << endl; 
 }
 
 //set and reset budget
@@ -49,23 +62,34 @@ void info::setBudget(){
 bool info::checkBudget()
 {
   ifstream fin(user + "_budget.txt");
-  if (fin.fail()) return 0;
-  else return 1;
+  if (fin.fail()) 
+	  return 0;
+  else{
+	  fin.close();
+	  return 1;
+  }
+  
 }
 
 
 //check whether newliest record and last record are in the same month
 //make sure user set budget monthly
 bool info::sameMonthBudget(){
-        string budgetDate, recordDate, temp;
+        string budgetDate, recordDate = "", temp;
         ifstream fin(user + "_budget.txt");
-        if (fin.fail()) return 0;
+        if (fin.fail()) 
+		return 0;
         getline(fin, budgetDate);
         fin.close();
         fin.open(user + "_records.txt");
-        while (getline(fin, temp)) recordDate = temp;
+        while (getline(fin, temp)) 
+		recordDate = temp;
         fin.close();
-        if (budgetDate.substr(0,7) == recordDate.substr(0,7)) return 1;
-        else return 0;
+        if (recordDate.length() == 0) 
+		return 1;
+        if (budgetDate.substr(0,7) == recordDate.substr(0,7)) 
+		return 1;
+        else 
+		return 0;
 }
 
