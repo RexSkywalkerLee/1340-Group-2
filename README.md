@@ -32,23 +32,45 @@ Overall system panel:
 ```
 
 1. - Add records
+   - Statement: Users could add record which contains information like amount, date, types of income or expense (e.g., food, game, salary, etc.), account (e.g.cash, bank card, credit card, etc.) so that users can check their detailed transaction records later on. **Note that only 1 record can be added each time.**
    - Assumptions: When user types in 1, the system opens a file and writes in the record, the user will be asked to type in record's type, amount, date, and account information sequentially.
    - Format stored in *_records.txt*: yyyy mm dd -/+ Specific_Type 100.00 Account_Type 
-     (for more details about add function please refer to *Sample implementation.pdf*)
+   - (for more details about this function please refer to *Sample implementation.pdf*)
 
 2. - Check records
+   - Statement: Users could view their records by date, type, and account so that users are able to look up for specific records by various information; **the system can also simply list recent records, given a valid upper limit.**
    - Assumptions: When user types in 2, the system opens the file containing the records and then searches for corresponding records according to the date/type/account the user input.
    - i.e., Search by: date   Search for: 01/03/2019
-     **All records found would be automatically numbered, which can be used for further check or delete and edit functions**
-     (for more details about add function please refer to *Sample implementation.pdf*)
+   - **All records found would be automatically numbered, which can be used for further check or delete and edit functions**
+   - (for more details about this function please refer to *Sample implementation.pdf*)
      
 3. - Edit records
-   - Assumptions: When user types in 3, the system opens the file containing the records and receives input (record information of the record to be deleted/edited) from the user, search for the specific record in the file. Then, the user can change single or multiple dimensions of this record.
+   - Statement: Users could edit any record at any time so that users are able to correct their mistakes when recording financial states.
+   - Assumptions: When user types in 3, the system opens the file containing the records and receives input (record information of the record to be edited) from the user, search for the specific record in the file. Then, the user can change single or multiple dimension(s) of this record.
+   - Sample dimension editing:
+   ```
+   2019 04 01 -            Breakfast      100     Cash
+      1  2  3 4                    5        7        8
+   ```
+   - **Note that changing dimension 4 will automatically change dimension 5; this will also be informed when system runs**
+   - (for more details about this function please refer to *Sample implementation.pdf*)
 
-5. - Statement: Users can monthly reset the budget and edit it at any time. When expenses reach the budget, there will be an alert from the system. Hence, users can flexibly change their financial plan and make sure that the expenses will not be beyond expectations.
-   - Assumptions: Each user has a file containing budget information. The system allows users to add, reset and edit their total budgets. This feature can open the file containing records and retrieve information, then calculate the remaining budgets and send out an alert when the remaining budget is below a predefined number.  
-
-6. - Statement: Users can request a statistical report of users’ financial state: monthly, quarterly, yearly income and expenses, the percentage of each type of income(salary, bonus, etc.) and expenses(food, transportation, etc.) so that users can view their financial states in a more systematic long-run perspective.
+4. - Delete records
+   - Statement: Users could delete any record at any time so that users are able to correct their mistakes when recording financial states.
+   - Assumptions: When user types in 4, the system opens the file containing the records and receives input (record information of the record to be edited) from the user, search for the specific record in the file. User can then select **single or multiple** records and delete them **by their coding.**
+   - (for more details about this function please refer to *Sample implementation.pdf*)
+   
+5. - Set Budget
+   - Statement: Users can monthly reset the budget and edit it at any time. **The remain and total budget will be printed right above the system's main panel.** When expenses reach the budget, there will be an alert from the system. Hence, users can flexibly change their financial plan and make sure that the expenses will not be beyond expectations. **The system will also warn user when it detects that the newest record is no older than the date stored in _\_budget.txt_.**
+   - Assumptions: Each user has a file containing budget information. The system allows users to add, reset and edit their total budgets. This feature can open the file containing records and retrieve information, then calculate the remaining budgets and send out an alert when the remaining budget is below a predefined number. 
+   - Sample:
+   `You don't have your budget yet. Please set a budget!`
+   `Please set a budget for a new month!`
+   `Remain Budget 200 / Total budget 500`
+   - (for more details about this function please refer to *Sample implementation.pdf*)
+   
+6. - 
+   - Statement: Users can request a statistical report of users’ financial state: monthly, quarterly, yearly income and expenses, the percentage of each type of income(salary, bonus, etc.) and expenses(food, transportation, etc.) so that users can view their financial states in a more systematic long-run perspective.
    - Assumptions: When the user types in a specific keyword to ask for a statistical report, the system opens the file containing records and retrieve information which was sorted by date, then calculate that monthly/quarterly/annual income/expense along with the percentage of each type and display them.  
 
 7. - Statement: Users can check their accounts information at any time; account information includes credit card invoice, bank account balance, etc.; accounts information will be automatically updated each time the user adds ( or delete/edit) expense or income records. Therefore, users can hold a clear idea about each account's information timely and have a quick response to any significant change of the balance.
