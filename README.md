@@ -110,6 +110,22 @@ etc.
   - (for more details about this function please refer to Sample implementation.pdf). 
 
 
+
+    
+Latest 7-day Graph
+Statement: Users can request a report of each day's balance(graphically) of the latest seven days so that the records of the most recent seven days can be represented more concisely and straightforwardly;
+Assumptions: When users request the latest 7-day report, the system will calculate each day's balance. The balance's value is then illustrated by the number of +(positive)/ -(negative). The report will be formed by listing the date and graphical balance of each day sequentially.
+Sample:
+2000 03 04  ---
+2000 03 03  -
+2000 03 02 +++
+......
+......
+(for more details about this function please refer to Sample implementation.pdf)
+
+
+
+
 ### Remarks:
 
 1.*Sample implementation.pdf* illustrates how nine main functions are implemented and the specific procedures to realize the features. Assessors can observe how our project performs without running the program through this document.   
