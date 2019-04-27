@@ -128,5 +128,8 @@ void terminateORnot()  //indicate users choice to whether continue
     cout << endl;
     return;
   }
-  else exit(1);
+  else{
+    cout << "Bye bye!" << endl;
+    exit(1);
+  }
 }

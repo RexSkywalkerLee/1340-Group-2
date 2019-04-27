@@ -12,7 +12,7 @@ void info::report()
   int firstChoice;
   cout << "Please indicate your choice:\n1. Year report\n2. Month report\n";
   cin >> firstChoice;
-  double report[25] = {0};
+  double* report = new double[25] ();
   ifstream fin(user + "_records.txt");
   string temp, tempNum, newest;
   while (getline(fin,temp)) newest = temp;
@@ -33,7 +33,7 @@ void info::report()
   fin.close();
   double income = 0, expense = 0, total = 0;
   for (int i = 0; i < 25; i++){
-    income += (i > 20) * report[i];
+    income += (i > 19) * report[i];
     expense += (i < 20) * report[i];
   }
   total = income - expense;
@@ -47,10 +47,15 @@ void info::report()
     if (i == 0)  cout << "\nEnpense type / total expense:\n";
     else if (i == 20) cout << "\nIncome type / total income:\n";
 
-    if (i < 20)
-      cout << setw(20) << left << balance[i] << report[i] << endl;
-    else
-      cout << setw(20) << left << balance[i] << report[i] << endl;
+    cout << setw(20) << left << balance[i];
+
+    cout << fixed << setprecision(2) << setw(7) << right;
+
+    if (i < 20) cout << (expense == 0 ? 0 : 100 * report[i] / expense);
+    else cout << (income == 0 ? 0 : 100 * report[i] / income);
+
+    cout <<  "% " << report[i] << endl;
         
   }
+  delete report;
 } 

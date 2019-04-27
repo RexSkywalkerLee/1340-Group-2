@@ -14,11 +14,13 @@ int main()
     if (userInfo.sameMonthBudget()) userInfo.updateBudget();
     else cout << "Please set budget for a new month!\n\n";
   }
-  else cout << "You don't have your budget yet. Please set a budget!";//remind users to set budget and timely update budget infomation
+
+  else cout << "You don't have your budget yet. Please set a budget!\n\n";//remind users to set budget and timely update budget infomation
   int choice;
   cout << "Please indicate your choice to start account management:\n";
   cout << "1. Add\n" << "2. Check\n" << "3. Edit\n" << "4. Delete\n"
-       << "5. Set Budget\n" << "6. Report\n" << "7. Latest\n" <<"8. Accounts information\n" << "9. Exit\n";//indicate diverse functions for user
+       << "5. Set Budget\n" << "6. Report\n" << "7. Latest\n" <<"8. Accounts Information\n" << "9. Exit\n";//indicate diverse functions for user
+
   cin >> choice;
   switch (choice){
     case 1:
@@ -34,7 +36,6 @@ int main()
     break;
     case 4:
     userInfo.deleteRecord();
-    cout << "\nRecord deleted!\n";
     break;
     case 5:
     userInfo.setBudget();
