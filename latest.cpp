@@ -7,7 +7,7 @@
 
 using namespace std;
 
-void updateDay(int &day,int month,int year){
+void updateDay(int &day,int month,int year){//verify the date( specific day ) of the latest 7 days
 switch (month) {
   case 0: case 1: case 3: case 5: case 7: case 8: case 10:
   day=31;
@@ -21,6 +21,7 @@ switch (month) {
 }
 }
 
+//print out a graphical report for the latest 7 days
 void info::latest(){
   int day,month,year;
 
@@ -39,7 +40,7 @@ void info::latest(){
     string day1=day<10? "0"+ to_string(day):to_string(day);
     string month1=month<10? "0"+ to_string(month):to_string(month);
     date[i]=to_string(year)+" "+month1+" "+day1;
-  }
+  }  //decide the date of the latest 7 days
     ifstream fin(user + "_records.txt");
     string record;
     while (getline(fin,record)){
@@ -53,7 +54,7 @@ void info::latest(){
       }
     }
   double unit;
-  cout<<"You wish one \'+\' represents  $";
+  cout<<"You wish one \'+\' represents  $";//utilize symbols to represent the daily balance
   cin>>unit;
   cout<<"So one \'-\' represents -$"<<unit <<endl;
   for (int j=0;j<7;j++){

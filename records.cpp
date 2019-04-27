@@ -10,6 +10,7 @@
 using namespace std;
 
 
+
 void info::emptyTemp()
 {
   int* recordSize = new int (tempRecords.size());
@@ -18,7 +19,7 @@ void info::emptyTemp()
 }
 
 
-void info::sortRecord()
+void info::sortRecord()//timely sort record.txt according to date
 {
   ifstream fin(user + "_records.txt");
   vector<string>records; string temp;
@@ -31,7 +32,7 @@ void info::sortRecord()
 }
 
 
-void info::addRecord()
+void info::addRecord()//step by step guidance for user to add a record
 {
   ofstream fout(user + "_records.txt", ios::app);
   char typeChoice;
@@ -68,7 +69,8 @@ void info::addRecord()
   updateAccount();
 }
 
-
+//search for particular records by any combination of record type, date and account type
+//and print out for users
 void info::checkRecord()
 {
   ifstream fin(user + "_records.txt");
@@ -85,7 +87,7 @@ void info::checkRecord()
          << "3. Account\n" << "4. Simply list recent records\n";
     cin >> choice1;
     switch (choice1){
-      case 1:{
+      case 1:{ 		//by record type 
         cout << "Searching for expense(please type \"-\") or income(please type \"+\")?" << endl;
         char tKey1; int tKey2; string recordType;
         cin >> tKey1;
@@ -107,14 +109,14 @@ void info::checkRecord()
           } 
           break;
         }
-        else{
+        else{		
           cout << "Please type in the type your search by:\n";
           cout << "1.Salary" << "\t2.Bonus" << "\t\t3.Allowance" << "\t4.Investment_Income" << "\t5.Other_Income" << endl;
           cin >> tKey2;
           cout << endl;
           for (int i = 0; i < records.size(); i++){
             istringstream iss(records[i]);
-            for (int j = 0; j < 5; j++) {if (j == 3) iss >> tKey1; else iss >> recordType;}
+            for (int j = 0; j < 5; j++) {if (j == 0) iss >> tKey1; else iss >> recordType;}
             if (tKey1 == '+' && balance[tKey2+19] == recordType){
               cout << tempRecords.size() + 1 << '.' << records[i] << endl;
               tempRecords.push_back(records[i]);
@@ -123,7 +125,7 @@ void info::checkRecord()
           break;
         }
       }
-      case 2:{
+      case 2:{//by date
         string day, month, year;
 	cout << "Please type in the date in the format dd mm yyyy: ";
 	cin >> day >> month >> year;
@@ -137,7 +139,7 @@ void info::checkRecord()
           }
         }
         break;}
-      case 3:{
+      case 3:{//by account type
         cout << "Please type in the account you search by:\n" << "1. Cash\n" << "2. Debit Card\n" << "3. Credit Card\n";
         int aKey; string accountType;
         cin >> aKey;
@@ -183,7 +185,7 @@ void info::checkRecord()
   cout << endl;
 }
 
-
+//delete records by straight type in 
 void info::deleteRecord()
 {
   cout << "Please specify the record you want to delete by check it;\n";
@@ -225,7 +227,7 @@ void info::deleteRecord()
   updateAccount();
 }
 
-
+//edit records by straight type in
 void info::editRecord()
 {
   cout << "Please specify the record you want to edit by check it;\n";
