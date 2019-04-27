@@ -13,6 +13,7 @@ string sign_up();
 string sign_in();
 void terminateORnot();
 
+
 int panel()//Greeting to users
 {
   int choice;
@@ -27,6 +28,7 @@ int panel()//Greeting to users
   cin >> choice;
   return choice;
 }
+
 
 string sign_up()//new user sign up and initial record.txt & account.txt
 {
@@ -105,18 +107,28 @@ string sign_in(){ //user sign in and greeting
   cout << "Username or password incorrect. Please indicate your choice. " << endl;
   cout << "1. Try again" << endl << "2. Sign up" << endl << "3. Cancel" << endl;
   cin >> choice;
-  if (choice == 1) goto JumpToPoint2;
-  else if (choice == 2) { fin.close(); sign_up();}
-  else { fin.close(); exit(1);}
+  if (choice == 1) 
+    goto JumpToPoint2;
+  else if (choice == 2){ 
+    fin.close(); 
+    sign_up();
+  }
+  else{ 
+    fin.close(); 
+    exit(1);
+  }
 }
 
 //sign feature
 string sign()
 {
   int choice = panel();
-  if (choice == 1) return sign_up();
-  else if (choice == 2) return  sign_in();
-  else exit(1);
+  if (choice == 1) 
+    return sign_up();
+  else if (choice == 2) 
+    return  sign_in();
+  else 
+    exit(1);
 }
 
 
