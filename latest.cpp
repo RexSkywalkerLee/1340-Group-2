@@ -7,6 +7,7 @@
 
 using namespace std;
 
+
 void updateDay(int &day,int month,int year){//verify the date( specific day ) of the latest 7 days
 switch (month) {
   case 0: case 1: case 3: case 5: case 7: case 8: case 10:
@@ -23,23 +24,24 @@ switch (month) {
 
 //print out a graphical report for the latest 7 days
 void info::latest(){
-  int day,month,year;
-
-  float daily[7]={0};
-  string* date= new string[7];
-  cout<<"Please type in the date of today in the format dd mm yyyy:"<<endl;
-  cin>>day>>month>>year;
-  for (int i=0;i<7;i++){
+  int day, month, year;
+  float daily[7] = {0};
+  string* date = new string[7];
+  cout << "Please type in the date of today in the format dd mm yyyy:" << endl;
+  cin >> day >> month >> year;
+  for (int i = 0; i < 7; i++){
     day--;
-    if (day==0) {
+    if (day == 0) {
       month--;
-      updateDay(day,month,year);}
-    if (month==0){
-      month=12;
-      year--;}
-    string day1=day<10? "0"+ to_string(day):to_string(day);
-    string month1=month<10? "0"+ to_string(month):to_string(month);
-    date[i]=to_string(year)+" "+month1+" "+day1;
+      updateDay(day,month,year);
+    }
+    if (month == 0){
+      month = 12;
+      year--;
+    }
+    string day1 = day<10? "0"+ to_string(day):to_string(day);
+    string month1 = month<10? "0"+ to_string(month):to_string(month);
+    date[i] = to_string(year) + " " + month1 + " " + day1;
   }  //decide the date of the latest 7 days
     ifstream fin(user + "_records.txt");
     string record;
@@ -48,7 +50,8 @@ void info::latest(){
         if(record.find(date[i])!=-1){
           istringstream iss(record);
           string temp[7];
-          for (int j = 0; j < 6; j++) iss >> temp[j];
+          for (int j = 0; j < 6; j++) 
+            iss >> temp[j];
           daily[i] += (record.find("+")!=11? (0-atof(temp[5].c_str())):atof(temp[5].c_str()));
         }
       }
@@ -58,9 +61,9 @@ void info::latest(){
   cin>>unit;
   cout<<"So one \'-\' represents -$"<<unit <<endl;
   for (int j=0;j<7;j++){
-    cout<<date[j]<<"  ";
-    string* unitnum= new string[7];
-    unitnum[j]= daily[j]>0? string(int(daily[j]/unit),'+'):string(abs(int(daily[j]/unit)),'-');
-    cout<<unitnum[j]<<endl;
+    cout << date[j] << "  ";
+    string* unitnum = new string[7];
+    unitnum[j] = daily[j]>0? string(int(daily[j]/unit),'+'):string(abs(int(daily[j]/unit)),'-');
+    cout << unitnum[j] << endl;
   }
 }
