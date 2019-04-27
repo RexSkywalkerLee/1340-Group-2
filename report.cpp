@@ -52,7 +52,7 @@ void info::report()
   cout << setfill(' ');
   for (int i = 0; i < 25; i++){
     if (i == 0)  
-      cout << "\nEnpense type / total expense:\n";
+      cout << "\nExpense type / total expense:\n";
     else if (i == 20) 
       cout << "\nIncome type / total income:\n";//print the persentage of each type
     cout << setw(20) << left << balance[i];
