@@ -130,7 +130,7 @@ void info::checkRecord()
           for (int i = 0; i < records.size(); i++){
             istringstream iss(records[i]);
             for (int j = 0; j < 5; j++){
-		    if (j == 0) 
+		    if (j == 3) 
 			    iss >> tKey1; 
 		    else 
 			    iss >> recordType;
