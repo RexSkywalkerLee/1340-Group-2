@@ -7,6 +7,8 @@
 
 using namespace std;
 
+//update total budget & remain budget when accounts infomation changes
+//send alert to user when remaining budget is negative
 void info::updateBudget()
 {
         ifstream fin(user + "_budget.txt");
@@ -29,7 +31,7 @@ void info::updateBudget()
 	else cout << endl; 
 }
 
-
+//set and reset budget
 void info::setBudget(){
 	double budget;
         string day, month, year;
@@ -43,7 +45,7 @@ void info::setBudget(){
 	
 }
 
-
+//check budget.txt can be successfully opened
 bool info::checkBudget()
 {
   ifstream fin(user + "_budget.txt");
@@ -52,6 +54,8 @@ bool info::checkBudget()
 }
 
 
+//check whether newliest record and last record are in the same month
+//make sure user set budget monthly
 bool info::sameMonthBudget(){
         string budgetDate, recordDate, temp;
         ifstream fin(user + "_budget.txt");

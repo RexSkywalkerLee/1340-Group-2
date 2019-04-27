@@ -4,6 +4,8 @@
 #include<sstream>
 #include<string>
 #include"head.h"
+#include<termios.h>
+#include<unistd.h>
 
 using namespace std;
 int panel();
@@ -11,7 +13,7 @@ string sign_up();
 string sign_in();
 void terminateORnot();
 
-int panel()
+int panel()//Greeting to users
 {
   int choice;
   cout << setfill('*');
@@ -26,16 +28,25 @@ int panel()
   return choice;
 }
 
-string sign_up()
+string sign_up()//new user sign up and initial record.txt & account.txt
 {
   string username, password, password_2;
   cout << "Please set your username: ";
   cin >> username;
   JumpToPoint1:
   cout << "Please set your password: ";
+  termios t1;
+  tcgetattr(STDIN_FILENO,&t1);
+  termios t2=t1;
+  t2.c_lflag &= ~ECHO;
+  tcsetattr(STDIN_FILENO,TCSANOW,&t2);
   cin >> password;
+  cout<<endl;
   cout << "Please confirm your password: ";
-  cin >> password_2;
+  cin >> password_2; 
+  cout<<endl;
+  tcsetattr(STDIN_FILENO,TCSANOW,&t1);
+
   if (password == password_2){
     ofstream fout ("userinfo.txt", ios::app);
     fout << username << ' ' << password << endl;
@@ -66,14 +77,21 @@ string sign_up()
 }
 
 
-string sign_in(){
+string sign_in(){ //user sign in and greeting
   string username = "", password = "", info, readname, readword;
   JumpToPoint2:
   ifstream fin ("userinfo.txt");
   cout << "Username: ";
   cin >> username;
+  termios t1;
+  tcgetattr(STDIN_FILENO,&t1);
+  termios t2=t1;
+  t2.c_lflag &= ~ECHO;
+  tcsetattr(STDIN_FILENO,TCSANOW,&t2);
   cout << "Password: ";
   cin >> password;
+  cout<<endl;
+  tcsetattr(STDIN_FILENO,TCSANOW,&t1);
   while (getline(fin, info)){
     istringstream iss(info);
     iss >> readname;
@@ -83,7 +101,7 @@ string sign_in(){
       return username;
     }
   }
-  int choice;
+  int choice;  // if wrong password
   cout << "Username or password incorrect. Please indicate your choice. " << endl;
   cout << "1. Try again" << endl << "2. Sign up" << endl << "3. Cancel" << endl;
   cin >> choice;
@@ -92,7 +110,7 @@ string sign_in(){
   else { fin.close(); exit(1);}
 }
 
-
+//sign feature
 string sign()
 {
   int choice = panel();
@@ -101,7 +119,7 @@ string sign()
   else exit(1);
 }
 
-void terminateORnot()
+void terminateORnot()  //indicate users choice to whether continue
 {
   cout <<"Continue management? (y/n)" << endl;
   char finalChoice;
