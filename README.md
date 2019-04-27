@@ -2,9 +2,13 @@
 ## Group members: Li Jialong(3035533795) Wang Xinxin(3035533563)
 ### Our group project is expected to use digital tools to manage users' financial status. We target to build an accounting system to help people keep track of their income and expense. 
 
-1. - Statement: Multiple users can manage their financial status through this accounting system.
+Before using the system: 
+ - Use `make main` to compile the source files.
+ - Use `./main` to execute the file.
+ 
+1. Sign up and Sign in
    - Assumptions: When one user signs up, the system will require him/her to set a username and password, and create various files to keep track of the user's financial states. Later user can sign in the system using their username and password. Also, all the usernames and corresponding passwords are stored in a specific file. 
-     - format: username password (i.e.: John 1234)
+   - 
    
 2. - Statement: Users can add records which contain information like amount, date, types of income or expense (e.g., food, game, salary, etc.), account (e.g.cash, bank card, credit card, etc.) so that users can check their detailed transaction records later on. 
    - Assumptions: When user types in a specific keyword (e.g., add), the system opens a file and writes in the record.
@@ -28,12 +32,3 @@
 
 8. - Statement: Users can request a report of each day's balance(graphically) of the latest seven days so that the records of the most recent seven days can be represented more concisely and straightforwardly;
    - Assumptions: When user types in a specific keyword to ask for a late report, the system opens the file containing records and retrieves records of the latest seven days, then calculates each day's balance. The balance's value is then illustrated by the number of special characters(e.g., &, *).The report will be formed by listing the date and graphical balance of each day sequentially.
- 
-Keyword structure:  
-1. Add	-----	add records
-2. Check ----- view records by date, type, and account
-3. Delete	-----	check and delete records
-4. Edit -----	check and edit records
-5. Setbudget	-----	monthly budget resetting and editing at any time
-6. Mreport/Qreport/Yreport ----- ask for monthly, quarterly, or yearly report
-7. Latest ------ request a report of each day's balance(graphically)
