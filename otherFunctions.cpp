@@ -119,6 +119,7 @@ string sign()
   else exit(1);
 }
 
+
 void terminateORnot()  //indicate users choice to whether continue
 {
   cout <<"Continue management? (y/n)" << endl;
@@ -133,3 +134,4 @@ void terminateORnot()  //indicate users choice to whether continue
     exit(1);
   }
 }
+
