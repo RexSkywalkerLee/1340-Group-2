@@ -9,12 +9,11 @@
 #include"head.h"
 using namespace std;
 
-
-
 void info::emptyTemp()
 {
   int* recordSize = new int (tempRecords.size());
-  for (int i = 0; i < *recordSize; i++) tempRecords.pop_back();
+  for (int i = 0; i < *recordSize; i++) 
+	  tempRecords.pop_back();
   delete recordSize;
 }
 
@@ -22,12 +21,15 @@ void info::emptyTemp()
 void info::sortRecord()//timely sort record.txt according to date
 {
   ifstream fin(user + "_records.txt");
-  vector<string>records; string temp;
-  while (getline(fin, temp)) records.push_back(temp);
+  vector<string>records; 
+  string temp;
+  while (getline(fin, temp)) 
+	  records.push_back(temp);
   fin.close();
   sort(records.begin(), records.end());
   ofstream fout(user + "_records.txt");
-  for (int i = 0; i < records.size(); i++) fout << records[i] << endl;
+  for (int i = 0; i < records.size(); i++) 
+	  fout << records[i] << endl;
   fout.close();
 }
 
@@ -36,7 +38,8 @@ void info::addRecord()//step by step guidance for user to add a record
 {
   ofstream fout(user + "_records.txt", ios::app);
   char typeChoice;
-  double amount; int recordType, accountType;
+  double amount; 
+  int recordType, accountType;
   string day, month, year;
   cout << "Please choose new record type:\n" << "1. Expense (please type \"-\")\n"
        << "2. Income (please type \"+\")\n";
@@ -60,14 +63,17 @@ void info::addRecord()//step by step guidance for user to add a record
        << "3.Credit Card\n";
   cin >> accountType;
   fout << year << ' ' << month << ' ' << day << ' ' << typeChoice << ' ';
-  if (typeChoice == '-') fout << balance[recordType-1];
-  else fout << balance[recordType+19];
+  if (typeChoice == '-') 
+	  fout << balance[recordType-1];
+  else 
+	  fout << balance[recordType+19];
   fout << ' ' << amount << ' ' << account[accountType] << endl;
   fout.close();
   cout << "\nRecord added!\n";
   sortRecord();
   updateAccount();
 }
+
 
 //search for particular records by any combination of record type, date and account type
 //and print out for users
@@ -77,11 +83,13 @@ void info::checkRecord()
   vector<string> records; 
   string temp;
   string* record = new string[7]; 
-  while (getline(fin, temp)) records.push_back(temp);
+  while (getline(fin, temp)) 
+	  records.push_back(temp);
   int choice1 = 1;
   while (choice1 == 1){
     int* recordSize = new int (tempRecords.size());
-    for (int i = 0; i < *recordSize; i++) tempRecords.pop_back();
+    for (int i = 0; i < *recordSize; i++) 
+	    tempRecords.pop_back();
     delete recordSize;
     cout << "Please indicate the way you are searching by:\n" << "1. Type\n" << "2. Date\n"
          << "3. Account\n" << "4. Simply list recent records\n";
@@ -101,7 +109,12 @@ void info::checkRecord()
           cout << endl;
           for (int i = 0; i < records.size(); i++){
             istringstream iss(records[i]);
-            for (int j = 0; j < 5; j++) {if (j == 3) iss >> tKey1; else iss >> recordType;}
+            for (int j = 0; j < 5; j++){
+		    if (j == 3) 
+			    iss >> tKey1; 
+		    else 
+			    iss >> recordType;
+	    }
             if (tKey1 == '-' && balance[tKey2-1] == recordType){
               cout << tempRecords.size() + 1 << '.' << records[i] << endl;
               tempRecords.push_back(records[i]);
@@ -116,7 +129,12 @@ void info::checkRecord()
           cout << endl;
           for (int i = 0; i < records.size(); i++){
             istringstream iss(records[i]);
-            for (int j = 0; j < 5; j++) {if (j == 0) iss >> tKey1; else iss >> recordType;}
+            for (int j = 0; j < 5; j++){
+		    if (j == 0) 
+			    iss >> tKey1; 
+		    else 
+			    iss >> recordType;
+	    }
             if (tKey1 == '+' && balance[tKey2+19] == recordType){
               cout << tempRecords.size() + 1 << '.' << records[i] << endl;
               tempRecords.push_back(records[i]);
@@ -132,27 +150,32 @@ void info::checkRecord()
         cout << endl;
         for (int i = 0; i < records.size(); i++){
           istringstream iss(records[i]);
-          for (int j = 0; j < 7; j++) iss >> record[j];
+          for (int j = 0; j < 7; j++) 
+		  iss >> record[j];
           if ((day==record[2])&&(month==record[1])&&(year==record[0])){
             cout << tempRecords.size() + 1 << '.' << records[i] << endl;
             tempRecords.push_back(records[i]);
           }
         }
-        break;}
+        break;
+      }
       case 3:{//by account type
         cout << "Please type in the account you search by:\n" << "1. Cash\n" << "2. Debit Card\n" << "3. Credit Card\n";
-        int aKey; string accountType;
+        int aKey; 
+	string accountType;
         cin >> aKey;
         cout << endl;
         for (int i = 0; i < records.size(); i++){
           istringstream iss(records[i]);
-          for (int j = 0; j < 7; j++) iss >> accountType;
+          for (int j = 0; j < 7; j++) 
+		  iss >> accountType;
           if (accountType == account[aKey]){
             cout << tempRecords.size() + 1 << '.' << records[i] << endl;
             tempRecords.push_back(records[i]);
           }
         }
-        break;}
+        break;
+      }
      case 4:{
        cout << "Please type in the maximum number of records you want to check: ";
        int max;
@@ -168,7 +191,8 @@ void info::checkRecord()
          tempRecords.push_back(records[i]);
        }
        delete tempMax;
-       break;}
+       break;
+     }
     }
     if (tempRecords.size() != 0){
       cout << "\n1.Further check\n2.No need for further check\n";
@@ -185,6 +209,7 @@ void info::checkRecord()
   cout << endl;
 }
 
+
 //delete records by straight type in 
 void info::deleteRecord()
 {
@@ -199,7 +224,8 @@ void info::deleteRecord()
   switch (basicChoice){
     case 3: return;
     case 2: 
-      vector<string>records; string* temp = new string;
+      vector<string>records; 
+      string* temp = new string;
       int num, index;
       cout << "How many of records listed above you want to delete? ";
       cin >> num;
@@ -207,7 +233,8 @@ void info::deleteRecord()
       cout << "Please type in the indexes of the records you want to delete(separated by white space): ";
       for (int i = 0; i < num; i++){
         ifstream fin(user + "_records.txt");
-        while (getline(fin,*temp)) records.push_back(*temp);
+        while (getline(fin,*temp)) 
+		records.push_back(*temp);
         fin.close();
         cin >> index;
         if (index > tempRecords.size()){
@@ -239,13 +266,16 @@ void info::editRecord()
     cin >> basicChoice;
   }
   switch (basicChoice){
-    case 3: return;
+    case 3: 
+	return;
     case 2: 
-      vector<string>records; string* temp = new string;
+      vector<string>records; 
+      string* temp = new string;
       int num, index;
       cout << "Please type in the index of the record you want to edit: ";
       ifstream fin(user + "_records.txt");
-      while (getline(fin,*temp)) records.push_back(*temp);
+      while (getline(fin,*temp)) 
+	      records.push_back(*temp);
       fin.close();
       cin >> index;
       if (index > tempRecords.size()){
@@ -255,33 +285,44 @@ void info::editRecord()
       *temp = tempRecords[index - 1];
       ofstream fout(user + "_records.txt");
       for (int j = 0; j < records.size(); j++){
-        if (records[j] != *temp) fout << records[j] << endl;
+        if (records[j] != *temp) 
+		fout << records[j] << endl;
         else{
-          string piece; vector <string> pieces;
+          string piece; 
+	  vector <string> pieces;
           istringstream iss(*temp);
           cout << setfill(' ');
           for (int k = 0; k < 7; k++){
             iss >> piece;
-            if (k < 4) cout << piece << ' ';
-            else if (k == 4) cout << setw(20) << piece << ' ';
-            else cout << setw(10) << piece << ' ';
+            if (k < 4) 
+		    cout << piece << ' ';
+            else if (k == 4) 
+		    cout << setw(20) << piece << ' ';
+            else 
+		    cout << setw(10) << piece << ' ';
             pieces.push_back(piece);
           }
           cout << endl;
           for (int k = 1; k < 8; k++){
             cout << right;
-            if (k == 1) cout << setw(4) << k << ' ';
-            else if (k > 1 && k < 4) cout << setw(2) << k << ' ';
-            else if (k == 4) cout << k << ' ';
-            else if (k == 5) cout << setw(20) << k << ' ';
-            else cout << setw(10) << k << ' ';
+            if (k == 1) 
+		    cout << setw(4) << k << ' ';
+            else if (k > 1 && k < 4) 
+		    cout << setw(2) << k << ' ';
+            else if (k == 4) 
+		    cout << k << ' ';
+            else if (k == 5) 
+		    cout << setw(20) << k << ' ';
+            else 
+		    cout << setw(10) << k << ' ';
           }            
           cout << endl;
           cout << "Please choose the dimensions you want to edit(separated by white space):\n"
                << "(!Notice: edit dimension 4 will automatically edit dimension 5)\n";
           int dimension;
           vector <int> dimensions;
-          cin.get(); getline(cin, *temp);
+          cin.get(); 
+	  getline(cin, *temp);
           istringstream iss2(*temp);
           while (iss2 >> dimension)
             dimensions.push_back(dimension);
@@ -293,7 +334,8 @@ void info::editRecord()
                   cout << "Edit dimension " << dimensions[i] << ':';
                   cin >> info;
                   pieces[dimensions[i]-1] = info;
-                  break;}
+                  break;
+		}
                 case 4:{
                   string info;
                   cout << "Edit dimension 4:(\"+\" or \"-\")";
@@ -313,7 +355,8 @@ void info::editRecord()
                   }
                   cin >> editChoice;
                   pieces[4] = pieces[3] == "-" ? balance[editChoice-1] : balance[editChoice+19];
-                  break;}
+                  break;
+		}
                 case 7:{
                   cout << "Edit dimension 7:(please type in index)\n";
                   int editChoice;
@@ -323,8 +366,10 @@ void info::editRecord()
                   break;}
             }
             for (int k = 0; k < 7; k++){
-              if (k != 6) fout << pieces[k] << ' ';
-              else fout << pieces[k] << endl;
+              if (k != 6) 
+		      fout << pieces[k] << ' ';
+              else 
+		      fout << pieces[k] << endl;
             }
           }
         } 
