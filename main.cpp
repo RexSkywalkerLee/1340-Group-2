@@ -2,6 +2,7 @@
 #include<string>
 #include"head.h"
 
+
 using namespace std;
 
 int main()
@@ -13,11 +14,11 @@ int main()
     if (userInfo.sameMonthBudget()) userInfo.updateBudget();
     else cout << "Please set budget for a new month!\n\n";
   }
-  else cout << "You don't have your budget yet. Please set a budget!";
+  else cout << "You don't have your budget yet. Please set a budget!";//remind users to set budget and timely update budget infomation
   int choice;
   cout << "Please indicate your choice to start account management:\n";
   cout << "1. Add\n" << "2. Check\n" << "3. Edit\n" << "4. Delete\n"
-       << "5. Set Budget\n" << "6. Report\n" << "7. Latest\n" <<"8. Accounts information\n" << "9. Exit\n";
+       << "5. Set Budget\n" << "6. Report\n" << "7. Latest\n" <<"8. Accounts information\n" << "9. Exit\n";//indicate diverse functions for user
   cin >> choice;
   switch (choice){
     case 1:
