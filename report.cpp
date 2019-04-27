@@ -6,7 +6,7 @@
 #include"head.h"
 
 using namespace std;
-
+//print out the annual&monthly report
 void info::report()
 {
   int firstChoice;
@@ -41,11 +41,11 @@ void info::report()
   else cout << "Month report:\n";
   cout << "Total balance of the " << (firstChoice == 1 ? "year: " : "month: ")
        << total << endl << "Total income: " << income << endl << "Total expense: "
-       << expense << endl;
+       << expense << endl;//print total income &expense
   cout << setfill(' ');
   for (int i = 0; i < 25; i++){
     if (i == 0)  cout << "\nEnpense type / total expense:\n";
-    else if (i == 20) cout << "\nIncome type / total income:\n";
+    else if (i == 20) cout << "\nIncome type / total income:\n";//print the persentage of each type
 
     cout << setw(20) << left << balance[i];
 
