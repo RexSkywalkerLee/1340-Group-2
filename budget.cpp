@@ -29,11 +29,11 @@ void info::updateBudget()
             continue;
           for (int i = 0; i < 6; i++){
             if (i == 3)
-	      cin >> key;
+	      iss >> key;
             else
               iss >> temp;
 	  }
-          sum += key == "-" ? 0 - atof(temp.c_str()) : atof(temp.c_str());
+          sum += key == "+" ? 0 - atof(temp.c_str()) : atof(temp.c_str());
         }
 	double remainBudget = totalBudget - sum;
         cout << "Remain Budget " << remainBudget << " / "
