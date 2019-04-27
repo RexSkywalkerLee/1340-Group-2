@@ -22,17 +22,18 @@ int main()
   switch (choice){
     case 1:
     userInfo.addRecord();
-    cout << "\nRecord added!\n";
     break;
     case 2:
     userInfo.checkRecord();
+    userInfo.emptyTemp();
     break;
     case 3:
     userInfo.editRecord();
-    cout << "\nRecord edited!\n";
+    userInfo.emptyTemp();
     break;
     case 4:
     userInfo.deleteRecord();
+    userInfo.emptyTemp();
     break;
     case 5:
     userInfo.setBudget();

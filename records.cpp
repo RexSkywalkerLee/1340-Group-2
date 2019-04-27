@@ -1,5 +1,6 @@
 #include<iostream>
 #include<string>
+#include<iomanip>
 #include<fstream>
 #include<sstream>
 #include<vector>
@@ -7,6 +8,14 @@
 #include<algorithm>
 #include"head.h"
 using namespace std;
+
+
+void info::emptyTemp()
+{
+  int* recordSize = new int (tempRecords.size());
+  for (int i = 0; i < *recordSize; i++) tempRecords.pop_back();
+  delete recordSize;
+}
 
 
 void info::sortRecord()
@@ -54,6 +63,7 @@ void info::addRecord()
   else fout << balance[recordType+19];
   fout << ' ' << amount << ' ' << account[accountType] << endl;
   fout.close();
+  cout << "\nRecord added!\n";
   sortRecord();
   updateAccount();
 }
@@ -150,10 +160,12 @@ void info::checkRecord()
          return;
        } 
        cout << endl;
-       for (int i = records.size() - 1; i >= records.size() - max && i >= 0; i--){
+       int* tempMax = new int (records.size());
+       for (int i = *tempMax - 1; i >= *tempMax - max && i >= 0; i--){
          cout << tempRecords.size() + 1 << '.' << records[i] << endl;
          tempRecords.push_back(records[i]);
        }
+       delete tempMax;
        break;}
     }
     if (tempRecords.size() != 0){
@@ -216,36 +228,109 @@ void info::deleteRecord()
 
 void info::editRecord()
 {
-  ifstream fin(user + "_records.txt");
-  vector<string>records; string* temp = new string;
-  while (getline(fin,*temp)) records.push_back(*temp);
-  fin.close();
-  cout << "Please type in specific infomation of the record you want to edit:\n";
-  cout << "(You can use check function to find the record to be edited first)\n";
-  cout << "1. check records\n2. straight type in\n";
-  int basicChoice; cin >> basicChoice;
-  JumpToPointEdit:
-  if (basicChoice == 1) checkRecord();
-  cout << "Please make your choice:\n1.Check again\n2.Type in record to be edited\n3.Exit\n";
-  cin >> basicChoice;
+  cout << "Please specify the record you want to edit by check it;\n";
+  int basicChoice = 1;
+  while (basicChoice == 1){
+    checkRecord();
+    cout << "Have you found the record you are looking for?\n"
+         << "1.No, check again\n2.Yes, stop checking\n3.Leave\n";
+    cin >> basicChoice;
+  }
   switch (basicChoice){
-    case 1: goto JumpToPointEdit;
-    case 3: exit(1); 
-    case 2: default: break;
+    case 3: return;
+    case 2: 
+      vector<string>records; string* temp = new string;
+      int num, index;
+      cout << "Please type in the index of the record you want to edit: ";
+      ifstream fin(user + "_records.txt");
+      while (getline(fin,*temp)) records.push_back(*temp);
+      fin.close();
+      cin >> index;
+      if (index > tempRecords.size()){
+        cout << "(Invalid index exists!)" << endl;
+        return;
+      }
+      *temp = tempRecords[index - 1];
+      ofstream fout(user + "_records.txt");
+      for (int j = 0; j < records.size(); j++){
+        if (records[j] != *temp) fout << records[j] << endl;
+        else{
+          string piece; vector <string> pieces;
+          istringstream iss(*temp);
+          cout << setfill(' ');
+          for (int k = 0; k < 7; k++){
+            iss >> piece;
+            if (k < 4) cout << piece << ' ';
+            else if (k == 4) cout << setw(20) << piece << ' ';
+            else cout << setw(10) << piece << ' ';
+            pieces.push_back(piece);
+          }
+          cout << endl;
+          for (int k = 1; k < 8; k++){
+            cout << right;
+            if (k == 1) cout << setw(4) << k << ' ';
+            else if (k > 1 && k < 4) cout << setw(2) << k << ' ';
+            else if (k == 4) cout << k << ' ';
+            else if (k == 5) cout << setw(20) << k << ' ';
+            else cout << setw(10) << k << ' ';
+          }            
+          cout << endl;
+          cout << "Please choose the dimensions you want to edit(separated by white space):\n"
+               << "(!Notice: edit dimension 4 will automatically edit dimension 5)\n";
+          int dimension;
+          vector <int> dimensions;
+          cin.get(); getline(cin, *temp);
+          istringstream iss2(*temp);
+          while (iss2 >> dimension)
+            dimensions.push_back(dimension);
+          delete temp;
+          for (int i = 0; i < dimensions.size(); i++){
+            switch (dimensions[i]){
+                case 1: case 2: case 3: case 6:{
+                  string info;
+                  cout << "Edit dimension " << dimensions[i] << ':';
+                  cin >> info;
+                  pieces[dimensions[i]-1] = info;
+                  break;}
+                case 4:{
+                  string info;
+                  cout << "Edit dimension 4:(\"+\" or \"-\")";
+                  cin >> info;
+                  pieces[3] = info;}
+                case 5:{
+                  cout << "Edit dimension 5:(please type in index)\n";
+                  int editChoice;
+                  if (pieces[3] == "-"){
+                    cout << "1.Breakfast" << "\t2.Dinner" << "\t3.Snacks" << "\t4.Grocery" << "\t\t5.Social" << endl;
+                    cout << "6.Lunch" << "\t\t7.Beverages" << "\t8.Traffic" << "\t9.Fun" << "\t\t\t10.Clothing" << endl;
+                    cout << "11.Shopping" << "\t12.Gifts" << "\t13.Medical" << "\t14.Investment_Expense" << "\t15.Transfer" << endl;
+                    cout << "16.Rent" << "\t\t17.Cash_Gift" << "\t18.Mobile_Bill" << "\t19.Visa" << "\t\t\t20.Other_Expense" << endl;
+                  }
+                  else{
+                    cout << "1.Salary" << "\t2.Bonus" << "\t\t3.Allowance" << "\t4.Investment_Income" << "\t5.Other_Income" << endl;
+                  }
+                  cin >> editChoice;
+                  pieces[4] = pieces[3] == "-" ? balance[editChoice-1] : balance[editChoice+19];
+                  break;}
+                case 7:{
+                  cout << "Edit dimension 7:(please type in index)\n";
+                  int editChoice;
+                  cout << "1. Cash\n" << "2. Debit Card\n" << "3. Credit Card\n";
+                  cin >> editChoice;
+                  pieces[6] = account[editChoice];
+                  break;}
+            }
+            for (int k = 0; k < 7; k++){
+              if (k != 6) fout << pieces[k] << ' ';
+              else fout << pieces[k] << endl;
+            }
+          }
+        } 
+      }            
+    fout.close();
+    records.clear();
   }
-  cout << "Record to be edited:\n";  cin.get();
-  getline(cin,*temp);
-  ofstream fout(user + "_records.txt");
-  for (int i = 0; i < records.size(); i++){
-    if (records[i] != *temp) fout << records[i] << endl;
-    else{
-      fout.close();
-      cout << "Please replace this record by specifying a new record:" << endl;
-      addRecord();
-      fout.open(user + "_records.txt", ios::app);
-    }
-  }
-  fout.close(); delete temp;
+  cout << "Record edited!" << endl;
   sortRecord();
   updateAccount();
 }

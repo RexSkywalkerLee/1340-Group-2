@@ -16,11 +16,11 @@ void info::report()
   ifstream fin(user + "_records.txt");
   string temp, tempNum, newest;
   while (getline(fin,temp)) newest = temp;
-  newest = firstChoice == 1 ? newest.substr(0,4) : newest.substr(5,2);
+  newest = firstChoice == 1 ? newest.substr(0,4) : newest.substr(0,7);
   fin.close(); fin.open(user + "_records.txt");
   while (getline(fin, temp)){
     if ((firstChoice == 1 && temp.find(newest) == 0) || 
-        (firstChoice == 2 && temp.find(newest) == 5)) {
+        (firstChoice == 2 && temp.find(newest) == 0)) {
       for (int i = 0; i < 25; i++){
         if (temp.find(balance[i]) != -1){ 
           istringstream iss(temp);
@@ -39,7 +39,7 @@ void info::report()
   total = income - expense;
   if (firstChoice == 1) cout << "Year report:\n";
   else cout << "Month report:\n";
-  cout << "Total balance of the " << (firstChoice == 1 ? "year: " : "month: ")
+  cout << "Total balance of this " << (firstChoice == 1 ? "year: " : "month: ")
        << total << endl << "Total income: " << income << endl << "Total expense: "
        << expense << endl;
   cout << setfill(' ');

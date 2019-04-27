@@ -101,6 +101,8 @@ string sign()
   else exit(1);
 }
 
+
+
 void terminateORnot()
 {
   cout <<"Continue management? (y/n)" << endl;
@@ -115,3 +117,4 @@ void terminateORnot()
     exit(1);
   }
 }
+
