@@ -97,22 +97,18 @@ Overall system panel:
    - (for more details about this function please refer to *Sample implementation.pdf*). 
 
 
-Account Information
-Statement: Users can request a report of each day's balance(graphically) of the latest seven days 
-Assumptions: Each user has a file containing the account information(the initial account information should be stored in this file the time a user signs up). Each time the user adds (edit, delete) a record, the system automatically updates the account information.  The system will display the account information when users requests.
-Sample:
+8. - Account Information
+   - Statement: Users can manage their account information with this system; when user types in 8 at main panel, the system will display user's account information(including cash, debit card, credit card).
+   - Assumptions: Each user has a file containing the account information(the initial account information should be stored in this file the time a user signs up). Each time the user adds (edit, delete) a record, the system automatically updates the account information.  The system will display the account information when users requests.
+  - Sample:
+```
 Account information of user: 
 Initial accounts information : 100 100 100
 Cash -200
-...
-...
-(for more details about this function please refer to Sample implementation.pdf)
+etc.
+```
+  - (for more details about this function please refer to Sample implementation.pdf). 
 
-
-
-
-8. - Statement: Users can request a report of each day's balance(graphically) of the latest seven days so that the records of the most recent seven days can be represented more concisely and straightforwardly;
-   - Assumptions: When user types in a specific keyword to ask for a late report, the system opens the file containing records and retrieves records of the latest seven days, then calculates each day's balance. The balance's value is then illustrated by the number of special characters(e.g., &, *).The report will be formed by listing the date and graphical balance of each day sequentially.
 
 ### Remarks:
 
