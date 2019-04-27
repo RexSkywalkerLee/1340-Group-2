@@ -7,7 +7,7 @@
 using namespace std;
 
 
-void info::updateAccount()
+void info::updateAccount()//automatically update accounts.txt infomation when records.txt is edited.
 {
     ifstream fin(user + "_records.txt");
     vector<string> records; string temp;
@@ -44,7 +44,8 @@ void info::updateAccount()
     fout.close();
 }
 
-void info::displayAccount(){
+//display account feature
+void info::displayAccount(){ // display the user's account infomation(cash, credit card, debit card)
     string item;
     cout<<"\nAccount information of "<<user<< ':' << endl;
     cout << "Initial accounts information: ";
